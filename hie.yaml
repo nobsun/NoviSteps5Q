@@ -1,0 +1,202 @@
+cradle:
+  stack:
+    - path: "./src"
+      component: "5Q:lib"
+
+    - path: "./app/Main.hs"
+      component: "5Q:exe:5Q"
+
+    - path: "./app/Paths_5Q.hs"
+      component: "5Q:exe:5Q"
+
+    - path: "./app/abcdef/Main.hs"
+      component: "5Q:exe:abcdef"
+
+    - path: "./app/abcdef/Paths_5Q.hs"
+      component: "5Q:exe:abcdef"
+
+    - path: "./app/adjacencylist/Main.hs"
+      component: "5Q:exe:adjacencylist"
+
+    - path: "./app/adjacencylist/Paths_5Q.hs"
+      component: "5Q:exe:adjacencylist"
+
+    - path: "./app/bombs/Main.hs"
+      component: "5Q:exe:bombs"
+
+    - path: "./app/bombs/Paths_5Q.hs"
+      component: "5Q:exe:bombs"
+
+    - path: "./app/buyonecartonofmilk/Main.hs"
+      component: "5Q:exe:buyonecartonofmilk"
+
+    - path: "./app/buyonecartonofmilk/Paths_5Q.hs"
+      component: "5Q:exe:buyonecartonofmilk"
+
+    - path: "./app/colorfulbeans/Main.hs"
+      component: "5Q:exe:colorfulbeans"
+
+    - path: "./app/colorfulbeans/Paths_5Q.hs"
+      component: "5Q:exe:colorfulbeans"
+
+    - path: "./app/coloringmatrix/Main.hs"
+      component: "5Q:exe:coloringmatrix"
+
+    - path: "./app/coloringmatrix/Paths_5Q.hs"
+      component: "5Q:exe:coloringmatrix"
+
+    - path: "./app/commencement/Main.hs"
+      component: "5Q:exe:commencement"
+
+    - path: "./app/commencement/Paths_5Q.hs"
+      component: "5Q:exe:commencement"
+
+    - path: "./app/countxxx/Main.hs"
+      component: "5Q:exe:countxxx"
+
+    - path: "./app/countxxx/Paths_5Q.hs"
+      component: "5Q:exe:countxxx"
+
+    - path: "./app/discord/Main.hs"
+      component: "5Q:exe:discord"
+
+    - path: "./app/discord/Paths_5Q.hs"
+      component: "5Q:exe:discord"
+
+    - path: "./app/explore/Main.hs"
+      component: "5Q:exe:explore"
+
+    - path: "./app/explore/Paths_5Q.hs"
+      component: "5Q:exe:explore"
+
+    - path: "./app/festival/Main.hs"
+      component: "5Q:exe:festival"
+
+    - path: "./app/festival/Paths_5Q.hs"
+      component: "5Q:exe:festival"
+
+    - path: "./app/findsnuke/Main.hs"
+      component: "5Q:exe:findsnuke"
+
+    - path: "./app/findsnuke/Paths_5Q.hs"
+      component: "5Q:exe:findsnuke"
+
+    - path: "./app/foreignexchange/Main.hs"
+      component: "5Q:exe:foreignexchange"
+
+    - path: "./app/foreignexchange/Paths_5Q.hs"
+      component: "5Q:exe:foreignexchange"
+
+    - path: "./app/langtonstakahashi/Main.hs"
+      component: "5Q:exe:langtonstakahashi"
+
+    - path: "./app/langtonstakahashi/Paths_5Q.hs"
+      component: "5Q:exe:langtonstakahashi"
+
+    - path: "./app/minimizeabs1/Main.hs"
+      component: "5Q:exe:minimizeabs1"
+
+    - path: "./app/minimizeabs1/Paths_5Q.hs"
+      component: "5Q:exe:minimizeabs1"
+
+    - path: "./app/modulonumber/Main.hs"
+      component: "5Q:exe:modulonumber"
+
+    - path: "./app/modulonumber/Paths_5Q.hs"
+      component: "5Q:exe:modulonumber"
+
+    - path: "./app/numberplace/Main.hs"
+      component: "5Q:exe:numberplace"
+
+    - path: "./app/numberplace/Paths_5Q.hs"
+      component: "5Q:exe:numberplace"
+
+    - path: "./app/perfectbus/Main.hs"
+      component: "5Q:exe:perfectbus"
+
+    - path: "./app/perfectbus/Paths_5Q.hs"
+      component: "5Q:exe:perfectbus"
+
+    - path: "./app/rotate/Main.hs"
+      component: "5Q:exe:rotate"
+
+    - path: "./app/rotate/Paths_5Q.hs"
+      component: "5Q:exe:rotate"
+
+    - path: "./app/roulette/Main.hs"
+      component: "5Q:exe:roulette"
+
+    - path: "./app/roulette/Paths_5Q.hs"
+      component: "5Q:exe:roulette"
+
+    - path: "./app/samemapintherpgworld/Main.hs"
+      component: "5Q:exe:samemapintherpgworld"
+
+    - path: "./app/samemapintherpgworld/Paths_5Q.hs"
+      component: "5Q:exe:samemapintherpgworld"
+
+    - path: "./app/split/Main.hs"
+      component: "5Q:exe:split"
+
+    - path: "./app/split/Paths_5Q.hs"
+      component: "5Q:exe:split"
+
+    - path: "./app/substring/Main.hs"
+      component: "5Q:exe:substring"
+
+    - path: "./app/substring/Paths_5Q.hs"
+      component: "5Q:exe:substring"
+
+    - path: "./app/takahashigetslost/Main.hs"
+      component: "5Q:exe:takahashigetslost"
+
+    - path: "./app/takahashigetslost/Paths_5Q.hs"
+      component: "5Q:exe:takahashigetslost"
+
+    - path: "./app/takcode/Main.hs"
+      component: "5Q:exe:takcode"
+
+    - path: "./app/takcode/Paths_5Q.hs"
+      component: "5Q:exe:takcode"
+
+    - path: "./app/triangleeasier/Main.hs"
+      component: "5Q:exe:triangleeasier"
+
+    - path: "./app/triangleeasier/Paths_5Q.hs"
+      component: "5Q:exe:triangleeasier"
+
+    - path: "./app/tricktaking/Main.hs"
+      component: "5Q:exe:tricktaking"
+
+    - path: "./app/tricktaking/Paths_5Q.hs"
+      component: "5Q:exe:tricktaking"
+
+    - path: "./app/tshirts/Main.hs"
+      component: "5Q:exe:tshirts"
+
+    - path: "./app/tshirts/Paths_5Q.hs"
+      component: "5Q:exe:tshirts"
+
+    - path: "./app/typing/Main.hs"
+      component: "5Q:exe:typing"
+
+    - path: "./app/typing/Paths_5Q.hs"
+      component: "5Q:exe:typing"
+
+    - path: "./app/worldmeeting/Main.hs"
+      component: "5Q:exe:worldmeeting"
+
+    - path: "./app/worldmeeting/Paths_5Q.hs"
+      component: "5Q:exe:worldmeeting"
+
+    - path: "./app/レ/Main.hs"
+      component: "5Q:exe:レ"
+
+    - path: "./app/レ/Paths_5Q.hs"
+      component: "5Q:exe:レ"
+
+    - path: "./test"
+      component: "5Q:test:5Q-doctest"
+
+    - path: "./test"
+      component: "5Q:test:5Q-test"

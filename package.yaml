@@ -1,0 +1,347 @@
+name:                5Q
+version:             0.0.0
+github:              nobsun/5Q
+license:             BSD3
+author:              Nobuo Yamashita
+maintainer:          nobsun@sampou.org
+copyright:           © 2024, Nobuo Yamashita
+
+extra-source-files:
+- README.md
+- ChangeLog.md
+
+# Metadata used when publishing your package
+# synopsis:            Short description of your package
+# category:            Experiment
+
+# To avoid duplicated efforts in documentation and dealing with the
+# complications of embedding Haddock markup inside cabal files, it is
+# common to point users to the README.md file.
+description:         Please see the README on GitHub at <https://github.com/nobsun/5Q#readme>
+
+dependencies:
+- base >= 4.7 && < 5
+- unicode-show
+- bytestring
+- utf8-string
+- time
+- hspec
+- main-tester
+- doctest
+- aeson
+- gloss
+- mod
+- array
+- containers
+- free
+- recursion-schemes
+- vector
+
+language: GHC2021
+
+default-extensions:
+- ImplicitParams
+- ImportQualifiedPost
+- LambdaCase
+- LexicalNegation
+- MultiWayIf
+- NPlusKPatterns
+- OverloadedStrings
+- DataKinds
+- PolyKinds
+- NoStarIsType
+- TypeFamilyDependencies
+- UndecidableInstances
+
+ghc-options:
+- -Wall
+- -Wno-unticked-promoted-constructors
+- -Wno-unused-imports
+- -Wno-unused-top-binds
+- -Wno-orphans
+
+library:
+  source-dirs: src
+
+executables:
+  triangleeasier:
+    main:            Main.hs
+    source-dirs:     app/triangleeasier
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - 5Q
+
+  explore:
+    main:            Main.hs
+    source-dirs:     app/explore
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - 5Q
+
+  modulonumber:
+    main:            Main.hs
+    source-dirs:     app/modulonumber
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - 5Q
+
+  split:
+    main:            Main.hs
+    source-dirs:     app/split
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - 5Q
+
+  abcdef:
+    main:            Main.hs
+    source-dirs:     app/abcdef
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - 5Q
+
+  adjacencylist:
+    main:            Main.hs
+    source-dirs:     app/adjacencylist
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - 5Q
+
+  レ:
+    main:            Main.hs
+    source-dirs:     app/レ
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - 5Q
+
+  bombs:
+    main:            Main.hs
+    source-dirs:     app/bombs
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - 5Q
+
+  coloringmatrix:
+    main:            Main.hs
+    source-dirs:     app/coloringmatrix
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - 5Q
+
+  tricktaking:
+    main:            Main.hs
+    source-dirs:     app/tricktaking
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - 5Q
+
+  samemapintherpgworld:
+    main:            Main.hs
+    source-dirs:     app/samemapintherpgworld
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - 5Q
+
+  findsnuke:
+    main:            Main.hs
+    source-dirs:     app/findsnuke
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - 5Q
+
+  discord:
+    main:            Main.hs
+    source-dirs:     app/discord
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - 5Q
+
+  rotate:
+    main:            Main.hs
+    source-dirs:     app/rotate
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - 5Q
+
+  takcode:
+    main:            Main.hs
+    source-dirs:     app/takcode
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - 5Q
+
+  roulette:
+    main:            Main.hs
+    source-dirs:     app/roulette
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - 5Q
+
+  festival:
+    main:            Main.hs
+    source-dirs:     app/festival
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - 5Q
+
+  worldmeeting:
+    main:            Main.hs
+    source-dirs:     app/worldmeeting
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - 5Q
+
+  numberplace:
+    main:            Main.hs
+    source-dirs:     app/numberplace
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - 5Q
+
+  countxxx:
+    main:            Main.hs
+    source-dirs:     app/countxxx
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - 5Q
+
+  minimizeabs1:
+    main:            Main.hs
+    source-dirs:     app/minimizeabs1
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - 5Q
+
+  buyonecartonofmilk:
+    main:            Main.hs
+    source-dirs:     app/buyonecartonofmilk
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - 5Q
+
+  tshirts:
+    main:            Main.hs
+    source-dirs:     app/tshirts
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - 5Q
+
+  langtonstakahashi:
+    main:            Main.hs
+    source-dirs:     app/langtonstakahashi
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - 5Q
+
+  perfectbus:
+    main:            Main.hs
+    source-dirs:     app/perfectbus
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - 5Q
+
+  foreignexchange:
+    main:            Main.hs
+    source-dirs:     app/foreignexchange
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - 5Q
+
+  takahashigetslost:
+    main:            Main.hs
+    source-dirs:     app/takahashigetslost
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - 5Q
+
+  substring:
+    main:            Main.hs
+    source-dirs:     app/substring
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - 5Q
+
+  colorfulbeans:
+    main:            Main.hs
+    source-dirs:     app/colorfulbeans
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - 5Q
+
+  typing:
+    main:            Main.hs
+    source-dirs:     app/typing
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - 5Q
+
+  commencement:
+    main:            Main.hs
+    source-dirs:     app/commencement
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - 5Q
+
+  5Q:
+    main:                Main.hs
+    source-dirs:         app
+    ghc-options:
+    - -rtsopts
+    # - -threaded
+    # - -with-rtsopts=-N
+    dependencies:
+    - 5Q
+
+tests:
+  5Q-test:
+    main:                spec.hs
+    source-dirs:         test
+    # ghc-options:
+    # - -threaded
+    # - -rtsopts
+    # - -with-rtsopts=-N
+    dependencies:
+    - 5Q
+    - hspec
+    - main-tester
+
+  5Q-doctest:
+    main:                doctests.hs
+    source-dirs:         test
+    # ghc-options:
+    # - -threaded
+    # - -rtsopts
+    # - -with-rtsopts=-N
+    dependencies:
+    - 5Q
+    - doctest

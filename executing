@@ -1,0 +1,4 @@
+#!/bin/zsh
+
+source .curname
+stack exec -- $CURRENT_ATCODER_EXE_NAME
