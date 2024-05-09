@@ -34,28 +34,27 @@ debug :: Bool
 debug = () == ()
 
 type I = Int
-type O = Int
+type O = Char
 
-type Solver = [(I,I)] -> O
+type Solver = (I,I,I) -> [[O]]
 
 solve :: Solver
 solve = \ case
-    uvs -> case S.fromList uvs of
-        vs -> countif (triangle vs)
-            $ concatMap (combinations 2) 
-            $ filter ((1 <) . length) 
-            $ groupBy ((==) `on` fst)
-            $ S.toList vs
+    (n,a,b) -> case cycle [white a b, black a b] of
+        ribon   -> case take n . flip drop ribon <$> [0 .. pred n] of
+            board   -> concatMap (map concat . transpose) board
 
-triangle :: S.Set (Int,Int) -> [(Int,Int)] -> Bool
-triangle vs = \ case
-    [(_,j),(_,k)] -> S.member (j,k) vs
-    _ -> invalid
+mktile :: Char -> Int -> Int -> [[Char]]
+mktile c h w = replicate h (replicate w c)
+
+white, black :: Int -> Int -> [[Char]]
+white = mktile '.'
+black = mktile '#'
+
 
 wrap :: Solver -> ([[I]] -> [[O]])
 wrap f = \ case
-    _:uvs -> case f (toTuple <$> uvs) of
-        r -> [[r]]
+    [n,a,b]:_ -> f (n,a,b)
     _   -> error "wrap: invalid input format"
 
 main :: IO ()
@@ -182,6 +181,7 @@ minform a (n,xs)
     where  (us,vs)  =  partition (< b) xs
            b        =  a + 1 + n `div` 2
            m        = length us
+
 {- misc -}
 toTuple :: [a] -> (a,a)
 toTuple = \ case
@@ -205,6 +205,3 @@ invalid = error "invalid input"
 trace :: String -> a -> a
 trace | debug     = Debug.trace
       | otherwise = const id
-
-tracing :: Show a => a -> a
-tracing = trace . show <*> id

@@ -31,30 +31,30 @@ import Data.Vector qualified as V
 import Debug.Trace qualified as Debug
 
 debug :: Bool
-debug = () == ()
+debug = () /= ()
 
 type I = Int
 type O = Int
 
-type Solver = [(I,I)] -> O
+type Solver = [I] -> O
 
 solve :: Solver
 solve = \ case
-    uvs -> case S.fromList uvs of
-        vs -> countif (triangle vs)
-            $ concatMap (combinations 2) 
-            $ filter ((1 <) . length) 
-            $ groupBy ((==) `on` fst)
-            $ S.toList vs
+    hs -> cost (zipWith ((abs .) . subtract) hs (drop 1 hs))
+               (zipWith ((abs .) . subtract) hs (drop 2 hs))
 
-triangle :: S.Set (Int,Int) -> [(Int,Int)] -> Bool
-triangle vs = \ case
-    [(_,j),(_,k)] -> S.member (j,k) vs
-    _ -> invalid
+cost :: [Int] -> [Int] -> Int
+cost (x:xs) ys = iter 0 x xs ys
+    where
+        iter _ q [] _ = q
+        iter p q (a:as) (b:bs)
+            = iter q (min (a+q) (b+p)) as bs
+        iter _ _ _ _ = invalid
+cost []     _  = invalid
 
 wrap :: Solver -> ([[I]] -> [[O]])
 wrap f = \ case
-    _:uvs -> case f (toTuple <$> uvs) of
+    _:hs:_ -> case f hs of
         r -> [[r]]
     _   -> error "wrap: invalid input format"
 
@@ -182,6 +182,7 @@ minform a (n,xs)
     where  (us,vs)  =  partition (< b) xs
            b        =  a + 1 + n `div` 2
            m        = length us
+
 {- misc -}
 toTuple :: [a] -> (a,a)
 toTuple = \ case
@@ -205,6 +206,3 @@ invalid = error "invalid input"
 trace :: String -> a -> a
 trace | debug     = Debug.trace
       | otherwise = const id
-
-tracing :: Show a => a -> a
-tracing = trace . show <*> id

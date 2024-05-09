@@ -21,6 +21,18 @@ cradle:
     - path: "./app/adjacencylist/Paths_5Q.hs"
       component: "5Q:exe:adjacencylist"
 
+    - path: "./app/atmost3judgever/Main.hs"
+      component: "5Q:exe:atmost3judgever"
+
+    - path: "./app/atmost3judgever/Paths_5Q.hs"
+      component: "5Q:exe:atmost3judgever"
+
+    - path: "./app/betterstudentsareneeded/Main.hs"
+      component: "5Q:exe:betterstudentsareneeded"
+
+    - path: "./app/betterstudentsareneeded/Paths_5Q.hs"
+      component: "5Q:exe:betterstudentsareneeded"
+
     - path: "./app/bombs/Main.hs"
       component: "5Q:exe:bombs"
 
@@ -63,6 +75,18 @@ cradle:
     - path: "./app/discord/Paths_5Q.hs"
       component: "5Q:exe:discord"
 
+    - path: "./app/enlargedcheckerboard/Main.hs"
+      component: "5Q:exe:enlargedcheckerboard"
+
+    - path: "./app/enlargedcheckerboard/Paths_5Q.hs"
+      component: "5Q:exe:enlargedcheckerboard"
+
+    - path: "./app/ex21/Main.hs"
+      component: "5Q:exe:ex21"
+
+    - path: "./app/ex21/Paths_5Q.hs"
+      component: "5Q:exe:ex21"
+
     - path: "./app/explore/Main.hs"
       component: "5Q:exe:explore"
 
@@ -87,11 +111,35 @@ cradle:
     - path: "./app/foreignexchange/Paths_5Q.hs"
       component: "5Q:exe:foreignexchange"
 
+    - path: "./app/frog1/Main.hs"
+      component: "5Q:exe:frog1"
+
+    - path: "./app/frog1/Paths_5Q.hs"
+      component: "5Q:exe:frog1"
+
+    - path: "./app/hydrate/Main.hs"
+      component: "5Q:exe:hydrate"
+
+    - path: "./app/hydrate/Paths_5Q.hs"
+      component: "5Q:exe:hydrate"
+
     - path: "./app/langtonstakahashi/Main.hs"
       component: "5Q:exe:langtonstakahashi"
 
     - path: "./app/langtonstakahashi/Paths_5Q.hs"
       component: "5Q:exe:langtonstakahashi"
+
+    - path: "./app/largelcm/Main.hs"
+      component: "5Q:exe:largelcm"
+
+    - path: "./app/largelcm/Paths_5Q.hs"
+      component: "5Q:exe:largelcm"
+
+    - path: "./app/longestsegment/Main.hs"
+      component: "5Q:exe:longestsegment"
+
+    - path: "./app/longestsegment/Paths_5Q.hs"
+      component: "5Q:exe:longestsegment"
 
     - path: "./app/minimizeabs1/Main.hs"
       component: "5Q:exe:minimizeabs1"
@@ -116,6 +164,12 @@ cradle:
 
     - path: "./app/perfectbus/Paths_5Q.hs"
       component: "5Q:exe:perfectbus"
+
+    - path: "./app/pizza/Main.hs"
+      component: "5Q:exe:pizza"
+
+    - path: "./app/pizza/Paths_5Q.hs"
+      component: "5Q:exe:pizza"
 
     - path: "./app/rotate/Main.hs"
       component: "5Q:exe:rotate"
@@ -147,6 +201,12 @@ cradle:
     - path: "./app/substring/Paths_5Q.hs"
       component: "5Q:exe:substring"
 
+    - path: "./app/sumofthreeintegers/Main.hs"
+      component: "5Q:exe:sumofthreeintegers"
+
+    - path: "./app/sumofthreeintegers/Paths_5Q.hs"
+      component: "5Q:exe:sumofthreeintegers"
+
     - path: "./app/takahashigetslost/Main.hs"
       component: "5Q:exe:takahashigetslost"
 
@@ -158,6 +218,12 @@ cradle:
 
     - path: "./app/takcode/Paths_5Q.hs"
       component: "5Q:exe:takcode"
+
+    - path: "./app/travelingsalesmanaroundlake/Main.hs"
+      component: "5Q:exe:travelingsalesmanaroundlake"
+
+    - path: "./app/travelingsalesmanaroundlake/Paths_5Q.hs"
+      component: "5Q:exe:travelingsalesmanaroundlake"
 
     - path: "./app/triangleeasier/Main.hs"
       component: "5Q:exe:triangleeasier"
@@ -182,6 +248,12 @@ cradle:
 
     - path: "./app/typing/Paths_5Q.hs"
       component: "5Q:exe:typing"
+
+    - path: "./app/uniquenicknames/Main.hs"
+      component: "5Q:exe:uniquenicknames"
+
+    - path: "./app/uniquenicknames/Paths_5Q.hs"
+      component: "5Q:exe:uniquenicknames"
 
     - path: "./app/worldmeeting/Main.hs"
       component: "5Q:exe:worldmeeting"

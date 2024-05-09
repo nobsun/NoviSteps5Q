@@ -64,6 +64,102 @@ library:
   source-dirs: src
 
 executables:
+  frog1:
+    main:            Main.hs
+    source-dirs:     app/frog1
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - 5Q
+
+  largelcm:
+    main:            Main.hs
+    source-dirs:     app/largelcm
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - 5Q
+
+  ex21:
+    main:            Main.hs
+    source-dirs:     app/ex21
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - 5Q
+
+  sumofthreeintegers:
+    main:            Main.hs
+    source-dirs:     app/sumofthreeintegers
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - 5Q
+
+  travelingsalesmanaroundlake:
+    main:            Main.hs
+    source-dirs:     app/travelingsalesmanaroundlake
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - 5Q
+
+  hydrate:
+    main:            Main.hs
+    source-dirs:     app/hydrate
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - 5Q
+
+  longestsegment:
+    main:            Main.hs
+    source-dirs:     app/longestsegment
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - 5Q
+
+  pizza:
+    main:            Main.hs
+    source-dirs:     app/pizza
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - 5Q
+
+  uniquenicknames:
+    main:            Main.hs
+    source-dirs:     app/uniquenicknames
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - 5Q
+
+  enlargedcheckerboard:
+    main:            Main.hs
+    source-dirs:     app/enlargedcheckerboard
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - 5Q
+
+  atmost3judgever:
+    main:            Main.hs
+    source-dirs:     app/atmost3judgever
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - 5Q
+
+  betterstudentsareneeded:
+    main:            Main.hs
+    source-dirs:     app/betterstudentsareneeded
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - 5Q
+
   triangleeasier:
     main:            Main.hs
     source-dirs:     app/triangleeasier

@@ -182,6 +182,12 @@ toTuple = \ case
 fromTuple :: (a,a) -> [a]
 fromTuple (x,y) = [x,y]
 
+countif :: (a -> Bool) -> [a] -> Int
+countif = iter 0
+    where
+        iter a p (x:xs) = iter (bool a (succ a) (p x)) p xs
+        iter a _ []     = a
+
 {- error -}
 invalid :: a
 invalid = error "invalid input"

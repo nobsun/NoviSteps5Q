@@ -21,6 +21,7 @@ import Data.Char
 import Data.Function
 import Data.List
 import Text.Printf
+import Data.Int
 
 import Data.IntMap qualified as IM
 import Data.IntSet qualified as IS
@@ -31,31 +32,31 @@ import Data.Vector qualified as V
 import Debug.Trace qualified as Debug
 
 debug :: Bool
-debug = () == ()
+debug = () /= ()
 
 type I = Int
-type O = Int
+type O = String
 
-type Solver = [(I,I)] -> O
+type Solver = (I,I) -> [[O]]
 
 solve :: Solver
 solve = \ case
-    uvs -> case S.fromList uvs of
-        vs -> countif (triangle vs)
-            $ concatMap (combinations 2) 
-            $ filter ((1 <) . length) 
-            $ groupBy ((==) `on` fst)
-            $ S.toList vs
+    (n,m) -> zipWith disp [0::Int ..] [f0 n,f1 n m,f2 n,f3 n,f4 n,f5 n m] where
+        disp i a = ["f"++show i++": "++show a]
 
-triangle :: S.Set (Int,Int) -> [(Int,Int)] -> Bool
-triangle vs = \ case
-    [(_,j),(_,k)] -> S.member (j,k) vs
-    _ -> invalid
+f0, f2, f3, f4 :: Int -> Int
+f1, f5 :: Int -> Int -> Int
+
+f0 _   = 1
+f1 n m = iterN m succ (iterN n succ 0)
+f2 n = iterN n (count (0 ==) (`div` 2) n +) 0
+f3 _ = iterN 3 (iterN 3 succ 0 +) 0
+f4 _ = -1
+f5 n m = fromIntegral (fromIntegral (sum [ i + j | i <- [0 .. pred n], j <- [0 .. pred m] ]) :: Int32)
 
 wrap :: Solver -> ([[I]] -> [[O]])
 wrap f = \ case
-    _:uvs -> case f (toTuple <$> uvs) of
-        r -> [[r]]
+    [n,m]:_ -> f (n,m)
     _   -> error "wrap: invalid input format"
 
 main :: IO ()
@@ -182,6 +183,7 @@ minform a (n,xs)
     where  (us,vs)  =  partition (< b) xs
            b        =  a + 1 + n `div` 2
            m        = length us
+
 {- misc -}
 toTuple :: [a] -> (a,a)
 toTuple = \ case
@@ -197,6 +199,21 @@ countif = iter 0
         iter a p (x:xs) = iter (bool a (succ a) (p x)) p xs
         iter a _ []     = a
 
+foldN :: (a -> a) -> a -> Int -> a
+foldN f z = \ case
+    0   -> z
+    n+1 -> f (foldN f z n)
+    _   -> error "negative"
+
+iterN :: Int -> (a -> a) -> (a -> a)
+iterN n f x = foldN f x n
+
+count :: (a -> Bool) -> (a -> a) -> a -> Int
+count p f = iter 0 where
+    iter c = \ case
+        x | p x       -> c
+          | otherwise -> iter (succ c) (f x)
+
 {- error -}
 invalid :: a
 invalid = error "invalid input"
@@ -205,6 +222,3 @@ invalid = error "invalid input"
 trace :: String -> a -> a
 trace | debug     = Debug.trace
       | otherwise = const id
-
-tracing :: Show a => a -> a
-tracing = trace . show <*> id
