@@ -1,6 +1,6 @@
-name:                5Q
+name:                NoviSteps5Q
 version:             0.0.0
-github:              nobsun/5Q
+github:              nobsun/NoviSteps5Q
 license:             BSD3
 author:              Nobuo Yamashita
 maintainer:          nobsun@sampou.org
@@ -17,7 +17,7 @@ extra-source-files:
 # To avoid duplicated efforts in documentation and dealing with the
 # complications of embedding Haddock markup inside cabal files, it is
 # common to point users to the README.md file.
-description:         Please see the README on GitHub at <https://github.com/nobsun/5Q#readme>
+description:         Please see the README on GitHub at <https://github.com/nobsun/NoviSteps5Q#readme>
 
 dependencies:
 - base >= 4.7 && < 5
@@ -64,13 +64,53 @@ library:
   source-dirs: src
 
 executables:
+  sunkescoloring2:
+    main:               Main.hs
+    source-dirs:        app/sunkescoloring2
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - NoviSteps5Q
+
+  movingballs:
+    main:               Main.hs
+    source-dirs:        app/movingballs
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - NoviSteps5Q
+
+  merge:
+    main:               Main.hs
+    source-dirs:        app/merge
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - NoviSteps5Q
+
+  exchange:
+    main:               Main.hs
+    source-dirs:        app/exchange
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - NoviSteps5Q
+
+  permcards:
+    main:               Main.hs
+    source-dirs:        app/permcards
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - NoviSteps5Q
+
   frog1:
     main:            Main.hs
     source-dirs:     app/frog1
     ghc-options:
     - -rtsopts
     dependencies:
-    - 5Q
+    - NoviSteps5Q
 
   largelcm:
     main:            Main.hs
@@ -78,7 +118,7 @@ executables:
     ghc-options:
     - -rtsopts
     dependencies:
-    - 5Q
+    - NoviSteps5Q
 
   ex21:
     main:            Main.hs
@@ -86,7 +126,7 @@ executables:
     ghc-options:
     - -rtsopts
     dependencies:
-    - 5Q
+    - NoviSteps5Q
 
   sumofthreeintegers:
     main:            Main.hs
@@ -94,7 +134,7 @@ executables:
     ghc-options:
     - -rtsopts
     dependencies:
-    - 5Q
+    - NoviSteps5Q
 
   travelingsalesmanaroundlake:
     main:            Main.hs
@@ -102,7 +142,7 @@ executables:
     ghc-options:
     - -rtsopts
     dependencies:
-    - 5Q
+    - NoviSteps5Q
 
   hydrate:
     main:            Main.hs
@@ -110,7 +150,7 @@ executables:
     ghc-options:
     - -rtsopts
     dependencies:
-    - 5Q
+    - NoviSteps5Q
 
   longestsegment:
     main:            Main.hs
@@ -118,7 +158,7 @@ executables:
     ghc-options:
     - -rtsopts
     dependencies:
-    - 5Q
+    - NoviSteps5Q
 
   pizza:
     main:            Main.hs
@@ -126,7 +166,7 @@ executables:
     ghc-options:
     - -rtsopts
     dependencies:
-    - 5Q
+    - NoviSteps5Q
 
   uniquenicknames:
     main:            Main.hs
@@ -134,7 +174,7 @@ executables:
     ghc-options:
     - -rtsopts
     dependencies:
-    - 5Q
+    - NoviSteps5Q
 
   enlargedcheckerboard:
     main:            Main.hs
@@ -142,7 +182,7 @@ executables:
     ghc-options:
     - -rtsopts
     dependencies:
-    - 5Q
+    - NoviSteps5Q
 
   atmost3judgever:
     main:            Main.hs
@@ -150,7 +190,7 @@ executables:
     ghc-options:
     - -rtsopts
     dependencies:
-    - 5Q
+    - NoviSteps5Q
 
   betterstudentsareneeded:
     main:            Main.hs
@@ -158,7 +198,7 @@ executables:
     ghc-options:
     - -rtsopts
     dependencies:
-    - 5Q
+    - NoviSteps5Q
 
   triangleeasier:
     main:            Main.hs
@@ -166,7 +206,7 @@ executables:
     ghc-options:
     - -rtsopts
     dependencies:
-    - 5Q
+    - NoviSteps5Q
 
   explore:
     main:            Main.hs
@@ -174,7 +214,7 @@ executables:
     ghc-options:
     - -rtsopts
     dependencies:
-    - 5Q
+    - NoviSteps5Q
 
   modulonumber:
     main:            Main.hs
@@ -182,7 +222,7 @@ executables:
     ghc-options:
     - -rtsopts
     dependencies:
-    - 5Q
+    - NoviSteps5Q
 
   split:
     main:            Main.hs
@@ -190,7 +230,7 @@ executables:
     ghc-options:
     - -rtsopts
     dependencies:
-    - 5Q
+    - NoviSteps5Q
 
   abcdef:
     main:            Main.hs
@@ -198,7 +238,7 @@ executables:
     ghc-options:
     - -rtsopts
     dependencies:
-    - 5Q
+    - NoviSteps5Q
 
   adjacencylist:
     main:            Main.hs
@@ -206,7 +246,7 @@ executables:
     ghc-options:
     - -rtsopts
     dependencies:
-    - 5Q
+    - NoviSteps5Q
 
   レ:
     main:            Main.hs
@@ -214,7 +254,7 @@ executables:
     ghc-options:
     - -rtsopts
     dependencies:
-    - 5Q
+    - NoviSteps5Q
 
   bombs:
     main:            Main.hs
@@ -222,7 +262,7 @@ executables:
     ghc-options:
     - -rtsopts
     dependencies:
-    - 5Q
+    - NoviSteps5Q
 
   coloringmatrix:
     main:            Main.hs
@@ -230,7 +270,7 @@ executables:
     ghc-options:
     - -rtsopts
     dependencies:
-    - 5Q
+    - NoviSteps5Q
 
   tricktaking:
     main:            Main.hs
@@ -238,7 +278,7 @@ executables:
     ghc-options:
     - -rtsopts
     dependencies:
-    - 5Q
+    - NoviSteps5Q
 
   samemapintherpgworld:
     main:            Main.hs
@@ -246,7 +286,7 @@ executables:
     ghc-options:
     - -rtsopts
     dependencies:
-    - 5Q
+    - NoviSteps5Q
 
   findsnuke:
     main:            Main.hs
@@ -254,7 +294,7 @@ executables:
     ghc-options:
     - -rtsopts
     dependencies:
-    - 5Q
+    - NoviSteps5Q
 
   discord:
     main:            Main.hs
@@ -262,7 +302,7 @@ executables:
     ghc-options:
     - -rtsopts
     dependencies:
-    - 5Q
+    - NoviSteps5Q
 
   rotate:
     main:            Main.hs
@@ -270,7 +310,7 @@ executables:
     ghc-options:
     - -rtsopts
     dependencies:
-    - 5Q
+    - NoviSteps5Q
 
   takcode:
     main:            Main.hs
@@ -278,7 +318,7 @@ executables:
     ghc-options:
     - -rtsopts
     dependencies:
-    - 5Q
+    - NoviSteps5Q
 
   roulette:
     main:            Main.hs
@@ -286,7 +326,7 @@ executables:
     ghc-options:
     - -rtsopts
     dependencies:
-    - 5Q
+    - NoviSteps5Q
 
   festival:
     main:            Main.hs
@@ -294,7 +334,7 @@ executables:
     ghc-options:
     - -rtsopts
     dependencies:
-    - 5Q
+    - NoviSteps5Q
 
   worldmeeting:
     main:            Main.hs
@@ -302,7 +342,7 @@ executables:
     ghc-options:
     - -rtsopts
     dependencies:
-    - 5Q
+    - NoviSteps5Q
 
   numberplace:
     main:            Main.hs
@@ -310,7 +350,7 @@ executables:
     ghc-options:
     - -rtsopts
     dependencies:
-    - 5Q
+    - NoviSteps5Q
 
   countxxx:
     main:            Main.hs
@@ -318,7 +358,7 @@ executables:
     ghc-options:
     - -rtsopts
     dependencies:
-    - 5Q
+    - NoviSteps5Q
 
   minimizeabs1:
     main:            Main.hs
@@ -326,7 +366,7 @@ executables:
     ghc-options:
     - -rtsopts
     dependencies:
-    - 5Q
+    - NoviSteps5Q
 
   buyonecartonofmilk:
     main:            Main.hs
@@ -334,7 +374,7 @@ executables:
     ghc-options:
     - -rtsopts
     dependencies:
-    - 5Q
+    - NoviSteps5Q
 
   tshirts:
     main:            Main.hs
@@ -342,7 +382,7 @@ executables:
     ghc-options:
     - -rtsopts
     dependencies:
-    - 5Q
+    - NoviSteps5Q
 
   langtonstakahashi:
     main:            Main.hs
@@ -350,7 +390,7 @@ executables:
     ghc-options:
     - -rtsopts
     dependencies:
-    - 5Q
+    - NoviSteps5Q
 
   perfectbus:
     main:            Main.hs
@@ -358,7 +398,7 @@ executables:
     ghc-options:
     - -rtsopts
     dependencies:
-    - 5Q
+    - NoviSteps5Q
 
   foreignexchange:
     main:            Main.hs
@@ -366,7 +406,7 @@ executables:
     ghc-options:
     - -rtsopts
     dependencies:
-    - 5Q
+    - NoviSteps5Q
 
   takahashigetslost:
     main:            Main.hs
@@ -374,7 +414,7 @@ executables:
     ghc-options:
     - -rtsopts
     dependencies:
-    - 5Q
+    - NoviSteps5Q
 
   substring:
     main:            Main.hs
@@ -382,7 +422,7 @@ executables:
     ghc-options:
     - -rtsopts
     dependencies:
-    - 5Q
+    - NoviSteps5Q
 
   colorfulbeans:
     main:            Main.hs
@@ -390,7 +430,7 @@ executables:
     ghc-options:
     - -rtsopts
     dependencies:
-    - 5Q
+    - NoviSteps5Q
 
   typing:
     main:            Main.hs
@@ -398,7 +438,7 @@ executables:
     ghc-options:
     - -rtsopts
     dependencies:
-    - 5Q
+    - NoviSteps5Q
 
   commencement:
     main:            Main.hs
@@ -406,9 +446,9 @@ executables:
     ghc-options:
     - -rtsopts
     dependencies:
-    - 5Q
+    - NoviSteps5Q
 
-  5Q:
+  NoviSteps5Q:
     main:                Main.hs
     source-dirs:         app
     ghc-options:
@@ -416,10 +456,10 @@ executables:
     # - -threaded
     # - -with-rtsopts=-N
     dependencies:
-    - 5Q
+    - NoviSteps5Q
 
 tests:
-  5Q-test:
+  NoviSteps5Q-test:
     main:                spec.hs
     source-dirs:         test
     # ghc-options:
@@ -427,11 +467,11 @@ tests:
     # - -rtsopts
     # - -with-rtsopts=-N
     dependencies:
-    - 5Q
+    - NoviSteps5Q
     - hspec
     - main-tester
 
-  5Q-doctest:
+  NoviSteps5Q-doctest:
     main:                doctests.hs
     source-dirs:         test
     # ghc-options:
@@ -439,5 +479,5 @@ tests:
     # - -rtsopts
     # - -with-rtsopts=-N
     dependencies:
-    - 5Q
+    - NoviSteps5Q
     - doctest

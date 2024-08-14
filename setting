@@ -1,8 +1,8 @@
 #!/bin/zsh
 
-ins-entry $1
+add-entry $1
 echo "export CURRENT_ATCODER_EXE_NAME=$1" >! .curname
 
-stack build 5Q:exe:$1
+stack build NoviSteps5Q:exe:$1
 
 gen-hie >! hie.yaml

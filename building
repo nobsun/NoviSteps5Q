@@ -1,4 +1,4 @@
 #!/bin/zsh
 
 source .curname
-stack build 5Q:exe:$CURRENT_ATCODER_EXE_NAME
+stack build NoviSteps5Q:exe:$CURRENT_ATCODER_EXE_NAME
