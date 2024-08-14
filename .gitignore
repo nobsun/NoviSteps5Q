@@ -1,6 +1,6 @@
 .stack-work/
 dist-new/
-5Q.cabal
+NoviSteps5Q.cabal
 *.log
 .curproj
 .curname
