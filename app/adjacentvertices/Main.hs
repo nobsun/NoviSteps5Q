@@ -34,18 +34,21 @@ debug :: Bool
 debug = () /= ()
 
 type I = Int
-type O = Int
+type O = String
 
-type Solver = () -> ()
+type Solver = (I,[(I,I)]) -> [(Int,[Int])]
 
 solve :: Solver
 solve = \ case
-    () -> ()
+    (n,sts) -> assocs $ accumArray (flip (:)) [] (1,n) $ concatMap phi sts where
+        phi (a,b) = [(a,b),(b,a)]
 
 wrap :: Solver -> ([[I]] -> [[O]])
 wrap f = \ case
-    _:_ -> case f () of
-        _rr -> [[]]
+    [n,_]:sts -> case f (n,toTuple <$> sts) of
+        rr -> map ((:[]) . conv) rr
+            where 
+                conv (i,as) = show i ++ ": " ++ "{" ++ intercalate ", " (show <$> sort as) ++ "}"
     _   -> error "wrap: invalid input format"
 
 main :: IO ()

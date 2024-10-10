@@ -36,16 +36,16 @@ debug = () /= ()
 type I = Int
 type O = Int
 
-type Solver = () -> ()
+type Solver = (I,I,[I]) -> [O]
 
 solve :: Solver
 solve = \ case
-    () -> ()
+    (n,m,as) -> elems $ accumArray (const . subtract 1) m (1,n) (map (,undefined) as)
 
 wrap :: Solver -> ([[I]] -> [[O]])
 wrap f = \ case
-    _:_ -> case f () of
-        _rr -> [[]]
+    [n,m]:as:_ -> case f (n,m,as) of
+        rr -> map (:[]) rr
     _   -> error "wrap: invalid input format"
 
 main :: IO ()

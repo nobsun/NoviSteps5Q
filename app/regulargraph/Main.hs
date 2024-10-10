@@ -36,17 +36,16 @@ debug = () /= ()
 type I = Int
 type O = Int
 
-type Solver = () -> ()
+type Solver = I -> [[O]]
 
 solve :: Solver
 solve = \ case
-    () -> ()
+    n -> take n $ map (take 2) $ tails $ cycle [1 .. n]
 
 wrap :: Solver -> ([[I]] -> [[O]])
 wrap f = \ case
-    _:_ -> case f () of
-        _rr -> [[]]
-    _   -> error "wrap: invalid input format"
+    [n]:_ -> [n] : f n
+    _     -> invalid
 
 main :: IO ()
 main = B.interact (encode . wrap solve . decode)

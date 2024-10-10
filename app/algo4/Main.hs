@@ -33,20 +33,38 @@ import Debug.Trace qualified as Debug
 debug :: Bool
 debug = () /= ()
 
-type I = Int
-type O = Int
+type I = String
+type O = String
 
-type Solver = () -> ()
+type Solver = [(I,Int)] -> O
 
 solve :: Solver
 solve = \ case
-    () -> ()
+    as -> case foldr phi mss (sortBy (comparing snd) as) of
+        []   -> invalid
+        [ns] -> ns
+        _    -> "Can't Solve"
+        where
+            mss = [[a,b,c,d] | a <- ds, b <- ds, c <- ds, d <- ds]
+            ds  = "0123456789" :: String
+            phi (s, i) ss = case i of
+                1 -> [s]
+                2 -> ts
+                _ -> us
+                where
+                    ts = [ t | t <- ss, countif (uncurry (==)) (zip s t) == 3]
+                    us = [ u | u <- ss, countif (uncurry (==)) (zip s u) <  3]
 
 wrap :: Solver -> ([[I]] -> [[O]])
 wrap f = \ case
-    _:_ -> case f () of
-        _rr -> [[]]
+    _:sts -> case f (map conv sts) of
+        r -> [[r]]
     _   -> error "wrap: invalid input format"
+
+conv :: [String] -> (String, Int)
+conv = \ case
+    [s,n] -> (s,read n)
+    _     -> invalid
 
 main :: IO ()
 main = B.interact (encode . wrap solve . decode)

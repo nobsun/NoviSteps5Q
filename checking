@@ -1,0 +1,4 @@
+#!/bin/bash
+source .curname
+stack exec -- judge-hs $1 $CURRENT_ATCODER_EXE_NAME
+

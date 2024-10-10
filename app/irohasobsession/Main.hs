@@ -36,16 +36,18 @@ debug = () /= ()
 type I = Int
 type O = Int
 
-type Solver = () -> ()
+type Solver = (I,[I]) -> O
 
 solve :: Solver
 solve = \ case
-    () -> ()
+    (n,ds) -> head $ dropWhile (any (flip IS.member dis . digitToInt) . show) [n ..]
+        where
+            dis = IS.fromList ds
 
 wrap :: Solver -> ([[I]] -> [[O]])
 wrap f = \ case
-    _:_ -> case f () of
-        _rr -> [[]]
+    [n,_]:ds:_ -> case f (n,ds) of
+        r -> [[r]]
     _   -> error "wrap: invalid input format"
 
 main :: IO ()

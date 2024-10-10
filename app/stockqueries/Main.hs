@@ -34,18 +34,27 @@ debug :: Bool
 debug = () /= ()
 
 type I = Int
-type O = Int
+type O = String
 
-type Solver = () -> ()
+type Solver = (I,I,[I],[(I,I)]) -> [O]
 
 solve :: Solver
 solve = \ case
-    () -> ()
+    (d,x,as,qs) -> iter (listArray (1,d) $ scanl1 (+) (x:as)) qs where
+        iter a ((s,t) : rs) = case compare sv tv of
+            LT -> show t : iter a rs
+            EQ -> "Same" : iter a rs
+            GT -> show s : iter a rs
+            where
+                sv = a ! s
+                tv = a ! t
+        iter _ [] = []
 
 wrap :: Solver -> ([[I]] -> [[O]])
 wrap f = \ case
-    _:_ -> case f () of
-        _rr -> [[]]
+    [d]:[x]:rss -> case second (map toTuple . tail) $ splitAt (d - 1) rss of
+        (as,qs) -> case f (d,x,concat as,qs) of
+            rr -> map (:[]) rr
     _   -> error "wrap: invalid input format"
 
 main :: IO ()
@@ -109,6 +118,9 @@ invalid = error "invalid input"
 trace :: String -> a -> a
 trace | debug     = Debug.trace
       | otherwise = const id
+
+traceShow :: Show a => a -> a
+traceShow = trace . show <*> id
 
 {- |
 >>> combinations 2 "abcd"

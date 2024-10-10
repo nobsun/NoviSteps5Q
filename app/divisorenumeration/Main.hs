@@ -36,16 +36,21 @@ debug = () /= ()
 type I = Int
 type O = Int
 
-type Solver = () -> ()
+type Solver = I -> [O]
 
 solve :: Solver
 solve = \ case
-    () -> ()
+    n -> iter [] 1 where
+        u = floor (sqrt (fromIntegral n) :: Double)
+        iter a = \ case
+            k | u < k     -> a
+              | otherwise -> case divMod n k of
+                (q,0) -> k : iter (bool (q:a) a (q == k)) (succ k)
+                _     ->     iter a     (succ k)
 
 wrap :: Solver -> ([[I]] -> [[O]])
 wrap f = \ case
-    _:_ -> case f () of
-        _rr -> [[]]
+    [n]:_ -> (:[]) <$> f n
     _   -> error "wrap: invalid input format"
 
 main :: IO ()

@@ -33,19 +33,20 @@ import Debug.Trace qualified as Debug
 debug :: Bool
 debug = () /= ()
 
-type I = Int
-type O = Int
+type I = Char
+type O = Char
 
-type Solver = () -> ()
+type Solver = [[I]] -> [O]
 
 solve :: Solver
 solve = \ case
-    () -> ()
+    ss -> case map (assocs . accumArray (+) 0 ('a','z') . map (,1::Int)) ss of
+        bss -> concatMap (uncurry (flip replicate) . minimumBy (comparing snd)) $ transpose bss
 
 wrap :: Solver -> ([[I]] -> [[O]])
 wrap f = \ case
-    _:_ -> case f () of
-        _rr -> [[]]
+    _:ss -> case f ss of
+        rr -> [rr]
     _   -> error "wrap: invalid input format"
 
 main :: IO ()
@@ -101,14 +102,6 @@ showDbl :: Double -> B.ByteString
 showDbl = B.pack . show
 
 {- Bonsai -}
-{- error -}
-invalid :: a
-invalid = error "invalid input"
-
-{- debug -}
-trace :: String -> a -> a
-trace | debug     = Debug.trace
-      | otherwise = const id
 
 {- |
 >>> combinations 2 "abcd"
@@ -196,40 +189,11 @@ countif = iter 0
         iter a p (x:xs) = iter (bool a (succ a) (p x)) p xs
         iter a _ []     = a
 
-{- zipper -}
-type Zp a = ([a],a,[a])
+{- error -}
+invalid :: a
+invalid = error "invalid input"
 
-toZp :: [a] -> Zp a
-toZp = \ case 
-    x:xs -> ([],x,xs)
-    _    -> error "toZp: empty list"
-
-fromZp :: Zp a -> [a]
-fromZp = \ case
-    (as,c,bs) -> foldl (flip (:)) (c:bs) as
-
-mvL :: Zp a -> Zp a
-mvL = \ case
-    (a:as,c,bs) -> (as,a,c:bs)
-    _           -> error "mvL: already at left-most"
-
-mvR :: Zp a -> Zp a
-mvR = \ case
-    (as,c,b:bs) -> (c:as,b,bs)
-    _           -> error "mvR: already at right-most"
-
-mvLwhile :: (a -> Bool) -> Zp a -> Zp a
-mvLwhile p = \ case
-    ascbs@([],_,_) -> ascbs
-    ascbs@(_,c,_)
-        | p c       -> mvLwhile p (mvL ascbs)
-        | otherwise -> ascbs
-
-mvRwhile :: (a -> Bool) -> Zp a -> Zp a
-mvRwhile p = \ case
-    ascbs@(_,_,[]) -> ascbs
-    ascbs@(_,c,_)
-        | p c       -> mvRwhile p (mvR ascbs)
-        | otherwise -> ascbs
-
-
+{- debug -}
+trace :: String -> a -> a
+trace | debug     = Debug.trace
+      | otherwise = const id

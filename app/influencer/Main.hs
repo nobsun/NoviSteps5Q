@@ -36,16 +36,18 @@ debug = () /= ()
 type I = Int
 type O = Int
 
-type Solver = () -> ()
+type Solver = (I,[(I,I)]) -> O
 
 solve :: Solver
 solve = \ case
-    () -> ()
+    (n,as) -> fst $ maximumBy (comparing snd) $ assocs $ accumArray (const  . succ) (0 :: Int) (1,n) $ concatMap phi as
+        where
+            phi (a,b) = [(a,b),(b,a)]
 
 wrap :: Solver -> ([[I]] -> [[O]])
 wrap f = \ case
-    _:_ -> case f () of
-        _rr -> [[]]
+    [n,_]:as -> case f (n, toTuple <$> as) of
+        r -> [[r]]
     _   -> error "wrap: invalid input format"
 
 main :: IO ()

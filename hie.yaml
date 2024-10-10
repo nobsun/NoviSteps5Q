@@ -3,6 +3,12 @@ cradle:
     - path: "./src"
       component: "NoviSteps5Q:lib"
 
+    - path: "./app/3ca/Main.hs"
+      component: "NoviSteps5Q:exe:3ca"
+
+    - path: "./app/3ca/Paths_NoviSteps5Q.hs"
+      component: "NoviSteps5Q:exe:3ca"
+
     - path: "./app/Main.hs"
       component: "NoviSteps5Q:exe:NoviSteps5Q"
 
@@ -21,17 +27,47 @@ cradle:
     - path: "./app/adjacencylist/Paths_NoviSteps5Q.hs"
       component: "NoviSteps5Q:exe:adjacencylist"
 
+    - path: "./app/adjacentvertices/Main.hs"
+      component: "NoviSteps5Q:exe:adjacentvertices"
+
+    - path: "./app/adjacentvertices/Paths_NoviSteps5Q.hs"
+      component: "NoviSteps5Q:exe:adjacentvertices"
+
+    - path: "./app/agedeference/Main.hs"
+      component: "NoviSteps5Q:exe:agedeference"
+
+    - path: "./app/agedeference/Paths_NoviSteps5Q.hs"
+      component: "NoviSteps5Q:exe:agedeference"
+
+    - path: "./app/algo4/Main.hs"
+      component: "NoviSteps5Q:exe:algo4"
+
+    - path: "./app/algo4/Paths_NoviSteps5Q.hs"
+      component: "NoviSteps5Q:exe:algo4"
+
     - path: "./app/atmost3judgever/Main.hs"
       component: "NoviSteps5Q:exe:atmost3judgever"
 
     - path: "./app/atmost3judgever/Paths_NoviSteps5Q.hs"
       component: "NoviSteps5Q:exe:atmost3judgever"
 
+    - path: "./app/betogeter/Main.hs"
+      component: "NoviSteps5Q:exe:betogeter"
+
+    - path: "./app/betogeter/Paths_NoviSteps5Q.hs"
+      component: "NoviSteps5Q:exe:betogeter"
+
     - path: "./app/betterstudentsareneeded/Main.hs"
       component: "NoviSteps5Q:exe:betterstudentsareneeded"
 
     - path: "./app/betterstudentsareneeded/Paths_NoviSteps5Q.hs"
       component: "NoviSteps5Q:exe:betterstudentsareneeded"
+
+    - path: "./app/binaryalchemy/Main.hs"
+      component: "NoviSteps5Q:exe:binaryalchemy"
+
+    - path: "./app/binaryalchemy/Paths_NoviSteps5Q.hs"
+      component: "NoviSteps5Q:exe:binaryalchemy"
 
     - path: "./app/bombs/Main.hs"
       component: "NoviSteps5Q:exe:bombs"
@@ -45,11 +81,35 @@ cradle:
     - path: "./app/buyonecartonofmilk/Paths_NoviSteps5Q.hs"
       component: "NoviSteps5Q:exe:buyonecartonofmilk"
 
+    - path: "./app/cardgame/Main.hs"
+      component: "NoviSteps5Q:exe:cardgame"
+
+    - path: "./app/cardgame/Paths_NoviSteps5Q.hs"
+      component: "NoviSteps5Q:exe:cardgame"
+
+    - path: "./app/cashregister/Main.hs"
+      component: "NoviSteps5Q:exe:cashregister"
+
+    - path: "./app/cashregister/Paths_NoviSteps5Q.hs"
+      component: "NoviSteps5Q:exe:cashregister"
+
+    - path: "./app/centers/Main.hs"
+      component: "NoviSteps5Q:exe:centers"
+
+    - path: "./app/centers/Paths_NoviSteps5Q.hs"
+      component: "NoviSteps5Q:exe:centers"
+
     - path: "./app/colorfulbeans/Main.hs"
       component: "NoviSteps5Q:exe:colorfulbeans"
 
     - path: "./app/colorfulbeans/Paths_NoviSteps5Q.hs"
       component: "NoviSteps5Q:exe:colorfulbeans"
+
+    - path: "./app/colorfultshirts/Main.hs"
+      component: "NoviSteps5Q:exe:colorfultshirts"
+
+    - path: "./app/colorfultshirts/Paths_NoviSteps5Q.hs"
+      component: "NoviSteps5Q:exe:colorfultshirts"
 
     - path: "./app/coloringmatrix/Main.hs"
       component: "NoviSteps5Q:exe:coloringmatrix"
@@ -63,17 +123,53 @@ cradle:
     - path: "./app/commencement/Paths_NoviSteps5Q.hs"
       component: "NoviSteps5Q:exe:commencement"
 
+    - path: "./app/counterclockwiserotation/Main.hs"
+      component: "NoviSteps5Q:exe:counterclockwiserotation"
+
+    - path: "./app/counterclockwiserotation/Paths_NoviSteps5Q.hs"
+      component: "NoviSteps5Q:exe:counterclockwiserotation"
+
+    - path: "./app/countingroads/Main.hs"
+      component: "NoviSteps5Q:exe:countingroads"
+
+    - path: "./app/countingroads/Paths_NoviSteps5Q.hs"
+      component: "NoviSteps5Q:exe:countingroads"
+
+    - path: "./app/countingsamevalues/Main.hs"
+      component: "NoviSteps5Q:exe:countingsamevalues"
+
+    - path: "./app/countingsamevalues/Paths_NoviSteps5Q.hs"
+      component: "NoviSteps5Q:exe:countingsamevalues"
+
     - path: "./app/countxxx/Main.hs"
       component: "NoviSteps5Q:exe:countxxx"
 
     - path: "./app/countxxx/Paths_NoviSteps5Q.hs"
       component: "NoviSteps5Q:exe:countxxx"
 
+    - path: "./app/digitsinmultiplication/Main.hs"
+      component: "NoviSteps5Q:exe:digitsinmultiplication"
+
+    - path: "./app/digitsinmultiplication/Paths_NoviSteps5Q.hs"
+      component: "NoviSteps5Q:exe:digitsinmultiplication"
+
     - path: "./app/discord/Main.hs"
       component: "NoviSteps5Q:exe:discord"
 
     - path: "./app/discord/Paths_NoviSteps5Q.hs"
       component: "NoviSteps5Q:exe:discord"
+
+    - path: "./app/divisorenumeration/Main.hs"
+      component: "NoviSteps5Q:exe:divisorenumeration"
+
+    - path: "./app/divisorenumeration/Paths_NoviSteps5Q.hs"
+      component: "NoviSteps5Q:exe:divisorenumeration"
+
+    - path: "./app/dubiousdocument/Main.hs"
+      component: "NoviSteps5Q:exe:dubiousdocument"
+
+    - path: "./app/dubiousdocument/Paths_NoviSteps5Q.hs"
+      component: "NoviSteps5Q:exe:dubiousdocument"
 
     - path: "./app/enlargedcheckerboard/Main.hs"
       component: "NoviSteps5Q:exe:enlargedcheckerboard"
@@ -123,11 +219,35 @@ cradle:
     - path: "./app/frog1/Paths_NoviSteps5Q.hs"
       component: "NoviSteps5Q:exe:frog1"
 
+    - path: "./app/gridcompression/Main.hs"
+      component: "NoviSteps5Q:exe:gridcompression"
+
+    - path: "./app/gridcompression/Paths_NoviSteps5Q.hs"
+      component: "NoviSteps5Q:exe:gridcompression"
+
+    - path: "./app/guidebook/Main.hs"
+      component: "NoviSteps5Q:exe:guidebook"
+
+    - path: "./app/guidebook/Paths_NoviSteps5Q.hs"
+      component: "NoviSteps5Q:exe:guidebook"
+
     - path: "./app/hydrate/Main.hs"
       component: "NoviSteps5Q:exe:hydrate"
 
     - path: "./app/hydrate/Paths_NoviSteps5Q.hs"
       component: "NoviSteps5Q:exe:hydrate"
+
+    - path: "./app/influencer/Main.hs"
+      component: "NoviSteps5Q:exe:influencer"
+
+    - path: "./app/influencer/Paths_NoviSteps5Q.hs"
+      component: "NoviSteps5Q:exe:influencer"
+
+    - path: "./app/irohasobsession/Main.hs"
+      component: "NoviSteps5Q:exe:irohasobsession"
+
+    - path: "./app/irohasobsession/Paths_NoviSteps5Q.hs"
+      component: "NoviSteps5Q:exe:irohasobsession"
 
     - path: "./app/langtonstakahashi/Main.hs"
       component: "NoviSteps5Q:exe:langtonstakahashi"
@@ -147,11 +267,29 @@ cradle:
     - path: "./app/longestsegment/Paths_NoviSteps5Q.hs"
       component: "NoviSteps5Q:exe:longestsegment"
 
+    - path: "./app/map/Main.hs"
+      component: "NoviSteps5Q:exe:map"
+
+    - path: "./app/map/Paths_NoviSteps5Q.hs"
+      component: "NoviSteps5Q:exe:map"
+
+    - path: "./app/maxaibj/Main.hs"
+      component: "NoviSteps5Q:exe:maxaibj"
+
+    - path: "./app/maxaibj/Paths_NoviSteps5Q.hs"
+      component: "NoviSteps5Q:exe:maxaibj"
+
     - path: "./app/merge/Main.hs"
       component: "NoviSteps5Q:exe:merge"
 
     - path: "./app/merge/Paths_NoviSteps5Q.hs"
       component: "NoviSteps5Q:exe:merge"
+
+    - path: "./app/mergesequences/Main.hs"
+      component: "NoviSteps5Q:exe:mergesequences"
+
+    - path: "./app/mergesequences/Paths_NoviSteps5Q.hs"
+      component: "NoviSteps5Q:exe:mergesequences"
 
     - path: "./app/minimizeabs1/Main.hs"
       component: "NoviSteps5Q:exe:minimizeabs1"
@@ -171,11 +309,23 @@ cradle:
     - path: "./app/movingballs/Paths_NoviSteps5Q.hs"
       component: "NoviSteps5Q:exe:movingballs"
 
+    - path: "./app/multiplication2/Main.hs"
+      component: "NoviSteps5Q:exe:multiplication2"
+
+    - path: "./app/multiplication2/Paths_NoviSteps5Q.hs"
+      component: "NoviSteps5Q:exe:multiplication2"
+
     - path: "./app/numberplace/Main.hs"
       component: "NoviSteps5Q:exe:numberplace"
 
     - path: "./app/numberplace/Paths_NoviSteps5Q.hs"
       component: "NoviSteps5Q:exe:numberplace"
+
+    - path: "./app/pconthetable/Main.hs"
+      component: "NoviSteps5Q:exe:pconthetable"
+
+    - path: "./app/pconthetable/Paths_NoviSteps5Q.hs"
+      component: "NoviSteps5Q:exe:pconthetable"
 
     - path: "./app/perfectbus/Main.hs"
       component: "NoviSteps5Q:exe:perfectbus"
@@ -195,6 +345,18 @@ cradle:
     - path: "./app/pizza/Paths_NoviSteps5Q.hs"
       component: "NoviSteps5Q:exe:pizza"
 
+    - path: "./app/quizcontest/Main.hs"
+      component: "NoviSteps5Q:exe:quizcontest"
+
+    - path: "./app/quizcontest/Paths_NoviSteps5Q.hs"
+      component: "NoviSteps5Q:exe:quizcontest"
+
+    - path: "./app/regulargraph/Main.hs"
+      component: "NoviSteps5Q:exe:regulargraph"
+
+    - path: "./app/regulargraph/Paths_NoviSteps5Q.hs"
+      component: "NoviSteps5Q:exe:regulargraph"
+
     - path: "./app/rotate/Main.hs"
       component: "NoviSteps5Q:exe:rotate"
 
@@ -213,11 +375,23 @@ cradle:
     - path: "./app/samemapintherpgworld/Paths_NoviSteps5Q.hs"
       component: "NoviSteps5Q:exe:samemapintherpgworld"
 
+    - path: "./app/sccpuzzle/Main.hs"
+      component: "NoviSteps5Q:exe:sccpuzzle"
+
+    - path: "./app/sccpuzzle/Paths_NoviSteps5Q.hs"
+      component: "NoviSteps5Q:exe:sccpuzzle"
+
     - path: "./app/split/Main.hs"
       component: "NoviSteps5Q:exe:split"
 
     - path: "./app/split/Paths_NoviSteps5Q.hs"
       component: "NoviSteps5Q:exe:split"
+
+    - path: "./app/stockqueries/Main.hs"
+      component: "NoviSteps5Q:exe:stockqueries"
+
+    - path: "./app/stockqueries/Paths_NoviSteps5Q.hs"
+      component: "NoviSteps5Q:exe:stockqueries"
 
     - path: "./app/substring/Main.hs"
       component: "NoviSteps5Q:exe:substring"
@@ -248,6 +422,30 @@ cradle:
 
     - path: "./app/takcode/Paths_NoviSteps5Q.hs"
       component: "NoviSteps5Q:exe:takcode"
+
+    - path: "./app/templatematching/Main.hs"
+      component: "NoviSteps5Q:exe:templatematching"
+
+    - path: "./app/templatematching/Paths_NoviSteps5Q.hs"
+      component: "NoviSteps5Q:exe:templatematching"
+
+    - path: "./app/trained/Main.hs"
+      component: "NoviSteps5Q:exe:trained"
+
+    - path: "./app/trained/Paths_NoviSteps5Q.hs"
+      component: "NoviSteps5Q:exe:trained"
+
+    - path: "./app/trainingcamp/Main.hs"
+      component: "NoviSteps5Q:exe:trainingcamp"
+
+    - path: "./app/trainingcamp/Paths_NoviSteps5Q.hs"
+      component: "NoviSteps5Q:exe:trainingcamp"
+
+    - path: "./app/trapezoidsum/Main.hs"
+      component: "NoviSteps5Q:exe:trapezoidsum"
+
+    - path: "./app/trapezoidsum/Paths_NoviSteps5Q.hs"
+      component: "NoviSteps5Q:exe:trapezoidsum"
 
     - path: "./app/travelingsalesmanaroundlake/Main.hs"
       component: "NoviSteps5Q:exe:travelingsalesmanaroundlake"
@@ -285,11 +483,29 @@ cradle:
     - path: "./app/uniquenicknames/Paths_NoviSteps5Q.hs"
       component: "NoviSteps5Q:exe:uniquenicknames"
 
+    - path: "./app/verticalreading/Main.hs"
+      component: "NoviSteps5Q:exe:verticalreading"
+
+    - path: "./app/verticalreading/Paths_NoviSteps5Q.hs"
+      component: "NoviSteps5Q:exe:verticalreading"
+
+    - path: "./app/verticalwriting/Main.hs"
+      component: "NoviSteps5Q:exe:verticalwriting"
+
+    - path: "./app/verticalwriting/Paths_NoviSteps5Q.hs"
+      component: "NoviSteps5Q:exe:verticalwriting"
+
     - path: "./app/worldmeeting/Main.hs"
       component: "NoviSteps5Q:exe:worldmeeting"
 
     - path: "./app/worldmeeting/Paths_NoviSteps5Q.hs"
       component: "NoviSteps5Q:exe:worldmeeting"
+
+    - path: "./app/yetanotherdiegame/Main.hs"
+      component: "NoviSteps5Q:exe:yetanotherdiegame"
+
+    - path: "./app/yetanotherdiegame/Paths_NoviSteps5Q.hs"
+      component: "NoviSteps5Q:exe:yetanotherdiegame"
 
     - path: "./app/レ/Main.hs"
       component: "NoviSteps5Q:exe:レ"

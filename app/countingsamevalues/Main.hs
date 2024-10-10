@@ -36,16 +36,25 @@ debug = () /= ()
 type I = Int
 type O = Int
 
-type Solver = () -> ()
+type Solver = [I] -> O
 
 solve :: Solver
 solve = \ case
-    () -> ()
+    as -> sum $ map (flip nCr 2 . length) $ traceShow $ filter phi $ group $ sort as where
+        phi = \ case
+            [_] -> False
+            _   -> True
+
+nCr :: Int -> Int -> Int
+nCr n r = foldl' phi 1 $ zip [n, pred n ..] [1 .. r']
+    where
+        r' = min r (n-r)
+        phi m (a,b) = m * a `div` b
 
 wrap :: Solver -> ([[I]] -> [[O]])
 wrap f = \ case
-    _:_ -> case f () of
-        _rr -> [[]]
+    _:as -> case f (concat as) of
+        r -> [[r]]
     _   -> error "wrap: invalid input format"
 
 main :: IO ()
@@ -109,6 +118,9 @@ invalid = error "invalid input"
 trace :: String -> a -> a
 trace | debug     = Debug.trace
       | otherwise = const id
+
+traceShow :: Show a => a -> a
+traceShow a = trace (show a) a
 
 {- |
 >>> combinations 2 "abcd"

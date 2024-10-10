@@ -33,20 +33,29 @@ import Debug.Trace qualified as Debug
 debug :: Bool
 debug = () /= ()
 
-type I = Int
+type I = String
 type O = Int
 
-type Solver = () -> ()
+type Solver = [(Int,I,Int)] -> [O]
 
 solve :: Solver
 solve = \ case
-    () -> ()
+    qs -> catMaybes $ snd $ mapAccumL phi M.empty qs where
+        phi ms = \ case
+            (1,x,y) -> (M.insert x y ms, Nothing)
+            (2,x,_) -> (ms, M.lookup x ms)
+            _ -> invalid
 
 wrap :: Solver -> ([[I]] -> [[O]])
 wrap f = \ case
-    _:_ -> case f () of
-        _rr -> [[]]
+    _:qs -> case f (map conv qs) of
+        rr -> map (:[]) rr
     _   -> error "wrap: invalid input format"
+    where
+        conv = \ case
+            [_, n, s] -> (1,n,read s)
+            [_, n]    -> (2,n,undefined)
+            _ -> invalid
 
 main :: IO ()
 main = B.interact (encode . wrap solve . decode)

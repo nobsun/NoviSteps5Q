@@ -36,16 +36,26 @@ debug = () /= ()
 type I = Int
 type O = Int
 
-type Solver = () -> ()
+type Solver = (I,[I]) -> [O]
 
 solve :: Solver
 solve = \ case
-    () -> ()
+    (n,as) -> iter (1::Int) 0 ts hs where
+        ts = S.fromList as
+        hs = iter2 S.empty (2*n) where
+            iter2 s = \ case
+                0 -> s
+                m -> iter2 (bool s (S.insert m s) (S.notMember m ts)) (pred m)
+        iter t d xs ys = if S.null ys then bool [S.size xs, 0] [0, S.size xs] (t > 0)
+            else case S.lookupGT d xs of
+                Nothing -> iter (negate t) 0 ys xs
+                Just x  -> iter (negate t) x ys (S.delete x xs)
+
 
 wrap :: Solver -> ([[I]] -> [[O]])
 wrap f = \ case
-    _:_ -> case f () of
-        _rr -> [[]]
+    [n]:as -> case f (n, concat as) of
+        rr -> map (:[]) rr
     _   -> error "wrap: invalid input format"
 
 main :: IO ()
@@ -101,14 +111,6 @@ showDbl :: Double -> B.ByteString
 showDbl = B.pack . show
 
 {- Bonsai -}
-{- error -}
-invalid :: a
-invalid = error "invalid input"
-
-{- debug -}
-trace :: String -> a -> a
-trace | debug     = Debug.trace
-      | otherwise = const id
 
 {- |
 >>> combinations 2 "abcd"
@@ -196,6 +198,15 @@ countif = iter 0
         iter a p (x:xs) = iter (bool a (succ a) (p x)) p xs
         iter a _ []     = a
 
+{- error -}
+invalid :: a
+invalid = error "invalid input"
+
+{- debug -}
+trace :: String -> a -> a
+trace | debug     = Debug.trace
+      | otherwise = const id
+
 {- zipper -}
 type Zp a = ([a],a,[a])
 
@@ -232,4 +243,10 @@ mvRwhile p = \ case
         | p c       -> mvRwhile p (mvR ascbs)
         | otherwise -> ascbs
 
+cursor :: Zp a -> a
+cursor (_,a,_) = a
 
+delcur :: Zp a -> Zp a
+delcur = \ case
+    (as,_,[])   -> (tail as, head as,[])
+    (as,_,b:bs) -> (as,b,bs)

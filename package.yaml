@@ -64,6 +64,294 @@ library:
   source-dirs: src
 
 executables:
+  irohasobsession:
+    main:               Main.hs
+    source-dirs:        app/irohasobsession
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - NoviSteps5Q
+
+  betogeter:
+    main:               Main.hs
+    source-dirs:        app/betogeter
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - NoviSteps5Q
+
+  algo4:
+    main:               Main.hs
+    source-dirs:        app/algo4
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - NoviSteps5Q
+
+  regulargraph:
+    main:               Main.hs
+    source-dirs:        app/regulargraph
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - NoviSteps5Q
+
+  divisorenumeration:
+    main:               Main.hs
+    source-dirs:        app/divisorenumeration
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - NoviSteps5Q
+
+  stockqueries:
+    main:               Main.hs
+    source-dirs:        app/stockqueries
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - NoviSteps5Q
+
+  influencer:
+    main:               Main.hs
+    source-dirs:        app/influencer
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - NoviSteps5Q
+
+  countingsamevalues:
+    main:               Main.hs
+    source-dirs:        app/countingsamevalues
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - NoviSteps5Q
+
+  quizcontest:
+    main:               Main.hs
+    source-dirs:        app/quizcontest
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - NoviSteps5Q
+
+  adjacentvertices:
+    main:               Main.hs
+    source-dirs:        app/adjacentvertices
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - NoviSteps5Q
+
+  map:
+    main:               Main.hs
+    source-dirs:        app/map
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - NoviSteps5Q
+
+  cardgame:
+    main:               Main.hs
+    source-dirs:        app/cardgame
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - NoviSteps5Q
+
+  agedeference:
+    main:               Main.hs
+    source-dirs:        app/agedeference
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - NoviSteps5Q
+
+  colorfultshirts:
+    main:               Main.hs
+    source-dirs:        app/colorfultshirts
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - NoviSteps5Q
+
+  yetanotherdiegame:
+    main:               Main.hs
+    source-dirs:        app/yetanotherdiegame
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - NoviSteps5Q
+
+  sccpuzzle:
+    main:               Main.hs
+    source-dirs:        app/sccpuzzle
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - NoviSteps5Q
+
+  digitsinmultiplication:
+    main:               Main.hs
+    source-dirs:        app/digitsinmultiplication
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - NoviSteps5Q
+
+  dubiousdocument:
+    main:               Main.hs
+    source-dirs:        app/dubiousdocument
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - NoviSteps5Q
+
+  countingroads:
+    main:               Main.hs
+    source-dirs:        app/countingroads
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - NoviSteps5Q
+
+  trained:
+    main:               Main.hs
+    source-dirs:        app/trained
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - NoviSteps5Q
+
+  gridcompression:
+    main:               Main.hs
+    source-dirs:        app/gridcompression
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - NoviSteps5Q
+
+  guidebook:
+    main:               Main.hs
+    source-dirs:        app/guidebook
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - NoviSteps5Q
+
+  trapezoidsum:
+    main:               Main.hs
+    source-dirs:        app/trapezoidsum
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - NoviSteps5Q
+
+  cashregister:
+    main:               Main.hs
+    source-dirs:        app/cashregister
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - NoviSteps5Q
+
+  pconthetable:
+    main:               Main.hs
+    source-dirs:        app/pconthetable
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - NoviSteps5Q
+
+  centers:
+    main:               Main.hs
+    source-dirs:        app/centers
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - NoviSteps5Q
+
+  verticalreading:
+    main:               Main.hs
+    source-dirs:        app/verticalreading
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - NoviSteps5Q
+
+  verticalwriting:
+    main:               Main.hs
+    source-dirs:        app/verticalwriting
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - NoviSteps5Q
+
+  binaryalchemy:
+    main:               Main.hs
+    source-dirs:        app/binaryalchemy
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - NoviSteps5Q
+
+  3ca:
+    main:               Main.hs
+    source-dirs:        app/3ca
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - NoviSteps5Q
+
+  maxaibj:
+    main:               Main.hs
+    source-dirs:        app/maxaibj
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - NoviSteps5Q
+
+  mergesequences:
+    main:               Main.hs
+    source-dirs:        app/mergesequences
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - NoviSteps5Q
+
+  counterclockwiserotation:
+    main:               Main.hs
+    source-dirs:        app/counterclockwiserotation
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - NoviSteps5Q
+
+  multiplication2:
+    main:               Main.hs
+    source-dirs:        app/multiplication2
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - NoviSteps5Q
+
+  trainingcamp:
+    main:               Main.hs
+    source-dirs:        app/trainingcamp
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - NoviSteps5Q
+
+  templatematching:
+    main:               Main.hs
+    source-dirs:        app/templatematching
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - NoviSteps5Q
+
   sunkescoloring2:
     main:               Main.hs
     source-dirs:        app/sunkescoloring2
