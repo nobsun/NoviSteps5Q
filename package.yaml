@@ -64,6 +64,14 @@ library:
   source-dirs: src
 
 executables:
+  bricbreak:
+    main:               Main.hs
+    source-dirs:        app/bricbreak
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - NoviSteps5Q
+
   irohasobsession:
     main:               Main.hs
     source-dirs:        app/irohasobsession

@@ -75,6 +75,12 @@ cradle:
     - path: "./app/bombs/Paths_NoviSteps5Q.hs"
       component: "NoviSteps5Q:exe:bombs"
 
+    - path: "./app/bricbreak/Main.hs"
+      component: "NoviSteps5Q:exe:bricbreak"
+
+    - path: "./app/bricbreak/Paths_NoviSteps5Q.hs"
+      component: "NoviSteps5Q:exe:bricbreak"
+
     - path: "./app/buyonecartonofmilk/Main.hs"
       component: "NoviSteps5Q:exe:buyonecartonofmilk"
 
