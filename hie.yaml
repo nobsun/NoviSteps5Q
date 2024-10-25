@@ -177,6 +177,12 @@ cradle:
     - path: "./app/dubiousdocument/Paths_NoviSteps5Q.hs"
       component: "NoviSteps5Q:exe:dubiousdocument"
 
+    - path: "./app/energydrinkcollector/Main.hs"
+      component: "NoviSteps5Q:exe:energydrinkcollector"
+
+    - path: "./app/energydrinkcollector/Paths_NoviSteps5Q.hs"
+      component: "NoviSteps5Q:exe:energydrinkcollector"
+
     - path: "./app/enlargedcheckerboard/Main.hs"
       component: "NoviSteps5Q:exe:enlargedcheckerboard"
 

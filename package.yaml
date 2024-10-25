@@ -64,6 +64,14 @@ library:
   source-dirs: src
 
 executables:
+  energydrinkcollector:
+    main:               Main.hs
+    source-dirs:        app/energydrinkcollector
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - NoviSteps5Q
+
   bricbreak:
     main:               Main.hs
     source-dirs:        app/bricbreak
