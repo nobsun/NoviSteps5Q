@@ -231,6 +231,12 @@ cradle:
     - path: "./app/frog1/Paths_NoviSteps5Q.hs"
       component: "NoviSteps5Q:exe:frog1"
 
+    - path: "./app/garbagecollection/Main.hs"
+      component: "NoviSteps5Q:exe:garbagecollection"
+
+    - path: "./app/garbagecollection/Paths_NoviSteps5Q.hs"
+      component: "NoviSteps5Q:exe:garbagecollection"
+
     - path: "./app/gridcompression/Main.hs"
       component: "NoviSteps5Q:exe:gridcompression"
 
@@ -369,6 +375,12 @@ cradle:
     - path: "./app/regulargraph/Paths_NoviSteps5Q.hs"
       component: "NoviSteps5Q:exe:regulargraph"
 
+    - path: "./app/repeating/Main.hs"
+      component: "NoviSteps5Q:exe:repeating"
+
+    - path: "./app/repeating/Paths_NoviSteps5Q.hs"
+      component: "NoviSteps5Q:exe:repeating"
+
     - path: "./app/rotate/Main.hs"
       component: "NoviSteps5Q:exe:rotate"
 
@@ -392,6 +404,12 @@ cradle:
 
     - path: "./app/sccpuzzle/Paths_NoviSteps5Q.hs"
       component: "NoviSteps5Q:exe:sccpuzzle"
+
+    - path: "./app/socks/Main.hs"
+      component: "NoviSteps5Q:exe:socks"
+
+    - path: "./app/socks/Paths_NoviSteps5Q.hs"
+      component: "NoviSteps5Q:exe:socks"
 
     - path: "./app/split/Main.hs"
       component: "NoviSteps5Q:exe:split"

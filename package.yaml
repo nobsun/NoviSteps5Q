@@ -64,6 +64,30 @@ library:
   source-dirs: src
 
 executables:
+  socks:
+    main:               Main.hs
+    source-dirs:        app/socks
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - NoviSteps5Q
+
+  garbagecollection:
+    main:               Main.hs
+    source-dirs:        app/garbagecollection
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - NoviSteps5Q
+
+  repeating:
+    main:               Main.hs
+    source-dirs:        app/repeating
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - NoviSteps5Q
+
   energydrinkcollector:
     main:               Main.hs
     source-dirs:        app/energydrinkcollector
