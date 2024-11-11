@@ -15,6 +15,12 @@ cradle:
     - path: "./app/Paths_NoviSteps5Q.hs"
       component: "NoviSteps5Q:exe:NoviSteps5Q"
 
+    - path: "./app/abc008b/Main.hs"
+      component: "NoviSteps5Q:exe:abc008b"
+
+    - path: "./app/abc008b/Paths_NoviSteps5Q.hs"
+      component: "NoviSteps5Q:exe:abc008b"
+
     - path: "./app/abcdef/Main.hs"
       component: "NoviSteps5Q:exe:abcdef"
 
@@ -237,6 +243,12 @@ cradle:
     - path: "./app/garbagecollection/Paths_NoviSteps5Q.hs"
       component: "NoviSteps5Q:exe:garbagecollection"
 
+    - path: "./app/goodsequence/Main.hs"
+      component: "NoviSteps5Q:exe:goodsequence"
+
+    - path: "./app/goodsequence/Paths_NoviSteps5Q.hs"
+      component: "NoviSteps5Q:exe:goodsequence"
+
     - path: "./app/gridcompression/Main.hs"
       component: "NoviSteps5Q:exe:gridcompression"
 
@@ -297,6 +309,12 @@ cradle:
     - path: "./app/maxaibj/Paths_NoviSteps5Q.hs"
       component: "NoviSteps5Q:exe:maxaibj"
 
+    - path: "./app/maximumvolume/Main.hs"
+      component: "NoviSteps5Q:exe:maximumvolume"
+
+    - path: "./app/maximumvolume/Paths_NoviSteps5Q.hs"
+      component: "NoviSteps5Q:exe:maximumvolume"
+
     - path: "./app/merge/Main.hs"
       component: "NoviSteps5Q:exe:merge"
 
@@ -333,6 +351,12 @@ cradle:
     - path: "./app/multiplication2/Paths_NoviSteps5Q.hs"
       component: "NoviSteps5Q:exe:multiplication2"
 
+    - path: "./app/newfolder1/Main.hs"
+      component: "NoviSteps5Q:exe:newfolder1"
+
+    - path: "./app/newfolder1/Paths_NoviSteps5Q.hs"
+      component: "NoviSteps5Q:exe:newfolder1"
+
     - path: "./app/numberplace/Main.hs"
       component: "NoviSteps5Q:exe:numberplace"
 
@@ -362,6 +386,12 @@ cradle:
 
     - path: "./app/pizza/Paths_NoviSteps5Q.hs"
       component: "NoviSteps5Q:exe:pizza"
+
+    - path: "./app/poll/Main.hs"
+      component: "NoviSteps5Q:exe:poll"
+
+    - path: "./app/poll/Paths_NoviSteps5Q.hs"
+      component: "NoviSteps5Q:exe:poll"
 
     - path: "./app/quizcontest/Main.hs"
       component: "NoviSteps5Q:exe:quizcontest"

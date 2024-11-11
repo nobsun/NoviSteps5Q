@@ -64,6 +64,46 @@ library:
   source-dirs: src
 
 executables:
+  goodsequence:
+    main:               Main.hs
+    source-dirs:        app/goodsequence
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - NoviSteps5Q
+
+  newfolder1:
+    main:               Main.hs
+    source-dirs:        app/newfolder1
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - NoviSteps5Q
+
+  maximumvolume:
+    main:               Main.hs
+    source-dirs:        app/maximumvolume
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - NoviSteps5Q
+
+  poll:
+    main:               Main.hs
+    source-dirs:        app/poll
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - NoviSteps5Q
+
+  abc008b:
+    main:               Main.hs
+    source-dirs:        app/abc008b
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - NoviSteps5Q
+
   socks:
     main:               Main.hs
     source-dirs:        app/socks
