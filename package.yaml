@@ -64,6 +64,14 @@ library:
   source-dirs: src
 
 executables:
+  runlengthcompression:
+    main:               Main.hs
+    source-dirs:        app/runlengthcompression
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - NoviSteps5Q
+
   goodsequence:
     main:               Main.hs
     source-dirs:        app/goodsequence

@@ -423,6 +423,12 @@ cradle:
     - path: "./app/roulette/Paths_NoviSteps5Q.hs"
       component: "NoviSteps5Q:exe:roulette"
 
+    - path: "./app/runlengthcompression/Main.hs"
+      component: "NoviSteps5Q:exe:runlengthcompression"
+
+    - path: "./app/runlengthcompression/Paths_NoviSteps5Q.hs"
+      component: "NoviSteps5Q:exe:runlengthcompression"
+
     - path: "./app/samemapintherpgworld/Main.hs"
       component: "NoviSteps5Q:exe:samemapintherpgworld"
 
