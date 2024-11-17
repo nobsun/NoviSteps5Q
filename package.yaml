@@ -64,6 +64,14 @@ library:
   source-dirs: src
 
 executables:
+  movesegment:
+    main:               Main.hs
+    source-dirs:        app/movesegment
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - NoviSteps5Q
+
   runlengthcompression:
     main:               Main.hs
     source-dirs:        app/runlengthcompression

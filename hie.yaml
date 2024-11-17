@@ -339,6 +339,12 @@ cradle:
     - path: "./app/modulonumber/Paths_NoviSteps5Q.hs"
       component: "NoviSteps5Q:exe:modulonumber"
 
+    - path: "./app/movesegment/Main.hs"
+      component: "NoviSteps5Q:exe:movesegment"
+
+    - path: "./app/movesegment/Paths_NoviSteps5Q.hs"
+      component: "NoviSteps5Q:exe:movesegment"
+
     - path: "./app/movingballs/Main.hs"
       component: "NoviSteps5Q:exe:movingballs"
 
