@@ -447,6 +447,12 @@ cradle:
     - path: "./app/sccpuzzle/Paths_NoviSteps5Q.hs"
       component: "NoviSteps5Q:exe:sccpuzzle"
 
+    - path: "./app/signuprequests/Main.hs"
+      component: "NoviSteps5Q:exe:signuprequests"
+
+    - path: "./app/signuprequests/Paths_NoviSteps5Q.hs"
+      component: "NoviSteps5Q:exe:signuprequests"
+
     - path: "./app/socks/Main.hs"
       component: "NoviSteps5Q:exe:socks"
 

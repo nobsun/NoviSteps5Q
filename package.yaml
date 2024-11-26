@@ -64,6 +64,14 @@ library:
   source-dirs: src
 
 executables:
+  signuprequests:
+    main:               Main.hs
+    source-dirs:        app/signuprequests
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - NoviSteps5Q
+
   movesegment:
     main:               Main.hs
     source-dirs:        app/movesegment
