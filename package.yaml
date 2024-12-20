@@ -64,6 +64,14 @@ library:
   source-dirs: src
 
 executables:
+  slimes:
+    main:               Main.hs
+    source-dirs:        app/slimes
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - NoviSteps5Q
+
   signuprequests:
     main:               Main.hs
     source-dirs:        app/signuprequests

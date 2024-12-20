@@ -453,6 +453,12 @@ cradle:
     - path: "./app/signuprequests/Paths_NoviSteps5Q.hs"
       component: "NoviSteps5Q:exe:signuprequests"
 
+    - path: "./app/slimes/Main.hs"
+      component: "NoviSteps5Q:exe:slimes"
+
+    - path: "./app/slimes/Paths_NoviSteps5Q.hs"
+      component: "NoviSteps5Q:exe:slimes"
+
     - path: "./app/socks/Main.hs"
       component: "NoviSteps5Q:exe:socks"
 
