@@ -36,16 +36,31 @@ debug = () /= ()
 type I = Int
 type O = Int
 
-type Solver = () -> ()
+type Solver = [I] -> [O]
 
 solve :: Solver
 solve = \ case
-    () -> ()
+    as -> case accumArray (+) 0 (0 :: Int,8) (conv <$> as) of
+        ar -> case filter ((0 <) . snd) (assocs ar) of
+            (0,c):[] -> [1, c]
+            (0,c):rs -> [len, len + c] where len = length rs
+            rs       -> [len, len] where len = length rs
+        where
+            conv a = if
+                | a <  400 -> (1,1)
+                | a <  800 -> (2,1)
+                | a < 1200 -> (3,1)
+                | a < 1600 -> (4,1)
+                | a < 2000 -> (5,1)
+                | a < 2400 -> (6,1)
+                | a < 2800 -> (7,1)
+                | a < 3200 -> (8,1)
+                | otherwise -> (0,1)
 
 wrap :: Solver -> ([[I]] -> [[O]])
 wrap f = \ case
-    _:_ -> case f () of
-        _rr -> [[]]
+    _:as:_ -> case f as of
+        rr -> [rr]
     _   -> error "wrap: invalid input format"
 
 main :: IO ()
@@ -163,7 +178,7 @@ splitEvery k = \ case
 [["y","a","y"],["ya","ay"],["yay"]]
 -}
 subsegments :: [a] -> [[[a]]]
-subsegments = drop 1 . transpose . map inits . transpose . tails 
+subsegments = tail . transpose . map inits . transpose . tails 
 
 {- |
 >>> mex [8,23,9,0,12,11,1,10,13,7,41,4,14,21,5,17,3,19,2,6]

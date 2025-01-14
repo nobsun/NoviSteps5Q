@@ -36,16 +36,35 @@ debug = () /= ()
 type I = Int
 type O = Int
 
-type Solver = () -> ()
+type Solver = (I,I) -> O
 
 solve :: Solver
 solve = \ case
-    () -> ()
+    (n,m)
+        | abs (n-m) == 0 -> 2 * r `mod` base
+        | abs (n-m) == 1 -> r
+        | otherwise      -> 0
+        where
+            r = m' `mul` n'
+            n' = fac n
+            m' = fac m
+
+mul :: Int -> Int -> Int
+mul x y = x * y `mod` base
+
+fac :: Int -> Int
+fac = \ case
+    0   -> 1
+    n+1 -> fac n `mul` (n+1)
+    _   -> error "negative"
+
+base :: Int
+base = 10^(9::Int) + 7
 
 wrap :: Solver -> ([[I]] -> [[O]])
 wrap f = \ case
-    _:_ -> case f () of
-        _rr -> [[]]
+    [n,m]:_ -> case f (n,m) of
+        r -> [[r]]
     _   -> error "wrap: invalid input format"
 
 main :: IO ()
@@ -163,7 +182,7 @@ splitEvery k = \ case
 [["y","a","y"],["ya","ay"],["yay"]]
 -}
 subsegments :: [a] -> [[[a]]]
-subsegments = drop 1 . transpose . map inits . transpose . tails 
+subsegments = tail . transpose . map inits . transpose . tails 
 
 {- |
 >>> mex [8,23,9,0,12,11,1,10,13,7,41,4,14,21,5,17,3,19,2,6]

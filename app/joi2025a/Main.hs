@@ -36,16 +36,28 @@ debug = () /= ()
 type I = Int
 type O = Int
 
-type Solver = () -> ()
+type Solver = (I,I,[[I]]) -> [O]
 
 solve :: Solver
 solve = \ case
-    () -> ()
+    (h,w,qss) -> case accumArray phi (Left 0) ((1,1),(h,w)) (concatMap conv qss) of
+        ar -> map (either id id) $ elems ar
+    where
+        conv = \ case
+            [1,i,j,c] -> map (,Just c)  [(i,j),(i',j),(i,j'),(i',j')] where {i' = succ i; j' = succ j}
+            [2,i,j]   -> map (,Nothing) [(i,j),(i',j),(i,j'),(i',j')] where {i' = succ i; j' = succ j}
+            _         -> invalid
+        phi = \ case
+            Left c -> \ case
+                Nothing -> Right c
+                Just c' -> Left c'
+            c -> const c
+
 
 wrap :: Solver -> ([[I]] -> [[O]])
 wrap f = \ case
-    _:_ -> case f () of
-        _rr -> [[]]
+    [h,w,_]:qss -> case f (h,w,qss) of
+        rr -> splitEvery w rr
     _   -> error "wrap: invalid input format"
 
 main :: IO ()
@@ -163,7 +175,7 @@ splitEvery k = \ case
 [["y","a","y"],["ya","ay"],["yay"]]
 -}
 subsegments :: [a] -> [[[a]]]
-subsegments = drop 1 . transpose . map inits . transpose . tails 
+subsegments = tail . transpose . map inits . transpose . tails 
 
 {- |
 >>> mex [8,23,9,0,12,11,1,10,13,7,41,4,14,21,5,17,3,19,2,6]

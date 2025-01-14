@@ -36,16 +36,21 @@ debug = () /= ()
 type I = Int
 type O = Int
 
-type Solver = () -> ()
+type Solver = (I,[(I,I)]) -> O
 
 solve :: Solver
 solve = \ case
-    () -> ()
+    (k,cs) -> iter 0 $ sort cs where
+        iter c bs = case bs of
+            (a,b):bs'
+                | c + b < k -> iter (c + b) bs'
+                | otherwise -> a
+            _        -> invalid
 
 wrap :: Solver -> ([[I]] -> [[O]])
 wrap f = \ case
-    _:_ -> case f () of
-        _rr -> [[]]
+    [_,k]:css -> case f (k,toTuple <$> css) of
+        r -> [[r]]
     _   -> error "wrap: invalid input format"
 
 main :: IO ()
@@ -163,7 +168,7 @@ splitEvery k = \ case
 [["y","a","y"],["ya","ay"],["yay"]]
 -}
 subsegments :: [a] -> [[[a]]]
-subsegments = drop 1 . transpose . map inits . transpose . tails 
+subsegments = tail . transpose . map inits . transpose . tails 
 
 {- |
 >>> mex [8,23,9,0,12,11,1,10,13,7,41,4,14,21,5,17,3,19,2,6]

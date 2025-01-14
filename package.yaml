@@ -64,6 +64,70 @@ library:
   source-dirs: src
 
 executables:
+  heavysnake:
+    main:               Main.hs
+    source-dirs:        app/heavysnake
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - NoviSteps5Q
+
+  santaclaus1:
+    main:               Main.hs
+    source-dirs:        app/santaclaus1
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - NoviSteps5Q
+
+  catsunukeandavoyage:
+    main:               Main.hs
+    source-dirs:        app/catsunukeandavoyage
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - NoviSteps5Q
+
+  splittingpile:
+    main:               Main.hs
+    source-dirs:        app/splittingpile
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - NoviSteps5Q
+
+  reconciled:
+    main:               Main.hs
+    source-dirs:        app/reconciled
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - NoviSteps5Q
+
+  colorfulleaderboard:
+    main:               Main.hs
+    source-dirs:        app/colorfulleaderboard
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - NoviSteps5Q
+
+  bigarray:
+    main:               Main.hs
+    source-dirs:        app/bigarray
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - NoviSteps5Q
+
+  joi2025a:
+    main:               Main.hs
+    source-dirs:        app/joi2025a
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - NoviSteps5Q
+
   slimes:
     main:               Main.hs
     source-dirs:        app/slimes

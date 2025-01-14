@@ -33,19 +33,55 @@ import Debug.Trace qualified as Debug
 debug :: Bool
 debug = () /= ()
 
-type I = Int
+type I = String
 type O = Int
 
-type Solver = () -> ()
+type Solver = (Int,Int,(Int,Int),[I],I) -> [O]
 
 solve :: Solver
 solve = \ case
-    () -> ()
+    (h,w,(x,y),ss,ts) -> case listArray ((1,1),(h,w)) (concat ss) of
+        ar -> case foldl' psi ((x,y), S.empty) ts of
+            ((p,q),rs) -> [p,q,S.size rs]
+            where
+                psi ((i,j),s) = \ case
+                    'U' | c == '#'  -> ((i,j),s)
+                        | c == '@'  -> ((i',j),S.insert (i',j) s)
+                        | otherwise -> ((i',j),s)
+                        where
+                            i' = pred i
+                            c = ar ! (i',j)
+                    'D' | c == '#'  -> ((i,j),s)
+                        | c == '@'  -> ((i',j),S.insert (i',j) s)
+                        | otherwise -> ((i',j),s)
+                        where
+                            i' = succ i
+                            c = ar ! (i',j)
+                    'L' | c == '#'  -> ((i,j),s)
+                        | c == '@'  -> ((i,j'),S.insert (i,j') s)
+                        | otherwise -> ((i,j'),s)
+                        where
+                            j' = pred j
+                            c = ar ! (i,j')
+                    'R' | c == '#'  -> ((i,j),s)
+                        | c == '@'  -> ((i,j'),S.insert (i,j') s)
+                        | otherwise -> ((i,j'),s)
+                        where
+                            j' = succ j
+                            c = ar ! (i,j')
+                    _ -> invalid
 
 wrap :: Solver -> ([[I]] -> [[O]])
 wrap f = \ case
-    _:_ -> case f () of
-        _rr -> [[]]
+    [h,w,x,y]:rs -> case splitAt h' rs of
+        (ss,ts) -> case f (h',w',(x',y'), concat ss, concat (concat ts)) of
+            rr -> [rr]
+        where
+            h' = read h
+            w' = read w
+            x' = read x
+            y' = read y
+
     _   -> error "wrap: invalid input format"
 
 main :: IO ()
@@ -163,7 +199,7 @@ splitEvery k = \ case
 [["y","a","y"],["ya","ay"],["yay"]]
 -}
 subsegments :: [a] -> [[[a]]]
-subsegments = drop 1 . transpose . map inits . transpose . tails 
+subsegments = tail . transpose . map inits . transpose . tails 
 
 {- |
 >>> mex [8,23,9,0,12,11,1,10,13,7,41,4,14,21,5,17,3,19,2,6]

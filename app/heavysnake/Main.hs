@@ -36,16 +36,16 @@ debug = () /= ()
 type I = Int
 type O = Int
 
-type Solver = () -> ()
+type Solver = (I,[(I,I)]) -> [O]
 
 solve :: Solver
 solve = \ case
-    () -> ()
+    (d,tls) -> maximum <$> [[ t*(l+k) | (t,l) <- tls ] | k <- [1 .. d]]
 
 wrap :: Solver -> ([[I]] -> [[O]])
 wrap f = \ case
-    _:_ -> case f () of
-        _rr -> [[]]
+    [_,k]:tls -> case f (k,toTuple <$> tls) of
+        rr -> singleton <$> rr
     _   -> error "wrap: invalid input format"
 
 main :: IO ()

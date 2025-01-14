@@ -36,16 +36,17 @@ debug = () /= ()
 type I = Int
 type O = Int
 
-type Solver = () -> ()
+type Solver = [I] -> O
 
 solve :: Solver
 solve = \ case
-    () -> ()
+    as -> case (sum as, scanl1 (+) as) of
+        (s,bs) -> minimum $ abs . (s -) . (2*) <$> init bs
 
 wrap :: Solver -> ([[I]] -> [[O]])
 wrap f = \ case
-    _:_ -> case f () of
-        _rr -> [[]]
+    _:as:_ -> case f as of
+        r -> [[r]]
     _   -> error "wrap: invalid input format"
 
 main :: IO ()
@@ -163,7 +164,7 @@ splitEvery k = \ case
 [["y","a","y"],["ya","ay"],["yay"]]
 -}
 subsegments :: [a] -> [[[a]]]
-subsegments = drop 1 . transpose . map inits . transpose . tails 
+subsegments = tail . transpose . map inits . transpose . tails 
 
 {- |
 >>> mex [8,23,9,0,12,11,1,10,13,7,41,4,14,21,5,17,3,19,2,6]
