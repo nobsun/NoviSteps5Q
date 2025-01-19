@@ -64,6 +64,14 @@ library:
   source-dirs: src
 
 executables:
+  fennecvsmonster:
+    main:               Main.hs
+    source-dirs:        app/fennecvsmonster
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - NoviSteps5Q
+
   heavysnake:
     main:               Main.hs
     source-dirs:        app/heavysnake

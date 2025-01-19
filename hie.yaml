@@ -231,6 +231,12 @@ cradle:
     - path: "./app/explore/Paths_NoviSteps5Q.hs"
       component: "NoviSteps5Q:exe:explore"
 
+    - path: "./app/fennecvsmonster/Main.hs"
+      component: "NoviSteps5Q:exe:fennecvsmonster"
+
+    - path: "./app/fennecvsmonster/Paths_NoviSteps5Q.hs"
+      component: "NoviSteps5Q:exe:fennecvsmonster"
+
     - path: "./app/festival/Main.hs"
       component: "NoviSteps5Q:exe:festival"
 
