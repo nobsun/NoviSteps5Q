@@ -64,6 +64,22 @@ library:
   source-dirs: src
 
 executables:
+  geometricsequence:
+    main:               Main.hs
+    source-dirs:        app/geometricsequence
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - NoviSteps5Q
+
+  notsodiverse:
+    main:               Main.hs
+    source-dirs:        app/notsodiverse
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - NoviSteps5Q
+
   fennecvsmonster:
     main:               Main.hs
     source-dirs:        app/fennecvsmonster

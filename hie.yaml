@@ -267,6 +267,12 @@ cradle:
     - path: "./app/garbagecollection/Paths_NoviSteps5Q.hs"
       component: "NoviSteps5Q:exe:garbagecollection"
 
+    - path: "./app/geometricsequence/Main.hs"
+      component: "NoviSteps5Q:exe:geometricsequence"
+
+    - path: "./app/geometricsequence/Paths_NoviSteps5Q.hs"
+      component: "NoviSteps5Q:exe:geometricsequence"
+
     - path: "./app/goodsequence/Main.hs"
       component: "NoviSteps5Q:exe:goodsequence"
 
@@ -398,6 +404,12 @@ cradle:
 
     - path: "./app/newfolder1/Paths_NoviSteps5Q.hs"
       component: "NoviSteps5Q:exe:newfolder1"
+
+    - path: "./app/notsodiverse/Main.hs"
+      component: "NoviSteps5Q:exe:notsodiverse"
+
+    - path: "./app/notsodiverse/Paths_NoviSteps5Q.hs"
+      component: "NoviSteps5Q:exe:notsodiverse"
 
     - path: "./app/numberplace/Main.hs"
       component: "NoviSteps5Q:exe:numberplace"
