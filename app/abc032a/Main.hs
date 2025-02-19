@@ -36,16 +36,20 @@ debug = () /= ()
 type I = Int
 type O = Int
 
-type Solver = () -> ()
+type Solver = (Int,Int,Int) -> Int
 
 solve :: Solver
 solve = \ case
-    () -> ()
+    (a,b,n) -> case dropWhile (n >) $ map (c *) [1 ..] of
+        x:_ -> x
+        _   -> error "impossible"
+        where
+            c = lcm a b
 
 wrap :: Solver -> ([[I]] -> [[O]])
 wrap f = \ case
-    _:_ -> case f () of
-        _rr -> [[]]
+    [a]:[b]:[n]:_ -> case f (a,b,n) of
+        r -> [[r]]
     _   -> error "wrap: invalid input format"
 
 main :: IO ()
@@ -63,10 +67,6 @@ class InterfaceForOJS a where
     showBs = B.unwords . map showB
     encode :: [[a]] -> B.ByteString
     encode = B.unlines . map showBs
-
-instance InterfaceForOJS B.ByteString where
-    readB = id
-    showB = id
 
 instance InterfaceForOJS Int where
     readB = readInt

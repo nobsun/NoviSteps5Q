@@ -33,19 +33,30 @@ import Debug.Trace qualified as Debug
 debug :: Bool
 debug = () /= ()
 
-type I = Int
+type I = String
 type O = Int
 
-type Solver = () -> ()
+type Solver = (Int,Int,[I],[I]) -> [O]
 
 solve :: Solver
 solve = \ case
-    () -> ()
+    (n,m,s,t) -> case range ((0,0),(n - m,n - m)) of
+        ij -> case take 1 $ foldr phi [] ij of
+            [] -> invalid
+            (a,b):_ -> [succ a,succ b]
+            where
+                phi (i,j) ks = if t == (map (take m . drop j) $ take m $ drop i s)
+                    then (i,j) : ks
+                    else ks
 
 wrap :: Solver -> ([[I]] -> [[O]])
 wrap f = \ case
-    _:_ -> case f () of
-        _rr -> [[]]
+    [n,m]:ss -> case splitAt n' ss of
+        (s,t) -> case f (n',m',concat s, concat t) of
+            rr -> [rr]
+        where
+            n' = read n
+            m' = read m
     _   -> error "wrap: invalid input format"
 
 main :: IO ()
@@ -63,10 +74,6 @@ class InterfaceForOJS a where
     showBs = B.unwords . map showB
     encode :: [[a]] -> B.ByteString
     encode = B.unlines . map showBs
-
-instance InterfaceForOJS B.ByteString where
-    readB = id
-    showB = id
 
 instance InterfaceForOJS Int where
     readB = readInt

@@ -33,19 +33,21 @@ import Debug.Trace qualified as Debug
 debug :: Bool
 debug = () /= ()
 
-type I = Int
-type O = Int
+type I = B.ByteString
+type O = B.ByteString
 
-type Solver = () -> ()
+type Solver = ([I],[I]) -> [O]
 
 solve :: Solver
 solve = \ case
-    () -> ()
+    (os,ks) -> map phi os where
+        phi s = bool "No" "Yes" (S.member s ss)
+        ss    = S.fromList ks
 
 wrap :: Solver -> ([[I]] -> [[O]])
 wrap f = \ case
-    _:_ -> case f () of
-        _rr -> [[]]
+    _:os:ks:_ -> case f (os,ks) of
+        rr -> map singleton rr
     _   -> error "wrap: invalid input format"
 
 main :: IO ()

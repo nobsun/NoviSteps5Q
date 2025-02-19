@@ -33,19 +33,19 @@ import Debug.Trace qualified as Debug
 debug :: Bool
 debug = () /= ()
 
-type I = Int
+type I = B.ByteString
 type O = Int
 
-type Solver = () -> ()
+type Solver = [B.ByteString] -> Int
 
 solve :: Solver
 solve = \ case
-    () -> ()
+    ss -> S.size $ S.fromList ss
 
 wrap :: Solver -> ([[I]] -> [[O]])
 wrap f = \ case
-    _:_ -> case f () of
-        _rr -> [[]]
+    _:sss -> case f (concat sss) of
+        r -> [[r]]
     _   -> error "wrap: invalid input format"
 
 main :: IO ()

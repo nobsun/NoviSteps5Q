@@ -21,6 +21,36 @@ cradle:
     - path: "./app/abc008b/Paths_NoviSteps5Q.hs"
       component: "NoviSteps5Q:exe:abc008b"
 
+    - path: "./app/abc032a/Main.hs"
+      component: "NoviSteps5Q:exe:abc032a"
+
+    - path: "./app/abc032a/Paths_NoviSteps5Q.hs"
+      component: "NoviSteps5Q:exe:abc032a"
+
+    - path: "./app/abc032b/Main.hs"
+      component: "NoviSteps5Q:exe:abc032b"
+
+    - path: "./app/abc032b/Paths_NoviSteps5Q.hs"
+      component: "NoviSteps5Q:exe:abc032b"
+
+    - path: "./app/abc154c/Main.hs"
+      component: "NoviSteps5Q:exe:abc154c"
+
+    - path: "./app/abc154c/Paths_NoviSteps5Q.hs"
+      component: "NoviSteps5Q:exe:abc154c"
+
+    - path: "./app/abc164c/Main.hs"
+      component: "NoviSteps5Q:exe:abc164c"
+
+    - path: "./app/abc164c/Paths_NoviSteps5Q.hs"
+      component: "NoviSteps5Q:exe:abc164c"
+
+    - path: "./app/abc236c/Main.hs"
+      component: "NoviSteps5Q:exe:abc236c"
+
+    - path: "./app/abc236c/Paths_NoviSteps5Q.hs"
+      component: "NoviSteps5Q:exe:abc236c"
+
     - path: "./app/abcdef/Main.hs"
       component: "NoviSteps5Q:exe:abcdef"
 
@@ -50,6 +80,12 @@ cradle:
 
     - path: "./app/algo4/Paths_NoviSteps5Q.hs"
       component: "NoviSteps5Q:exe:algo4"
+
+    - path: "./app/arc014b/Main.hs"
+      component: "NoviSteps5Q:exe:arc014b"
+
+    - path: "./app/arc014b/Paths_NoviSteps5Q.hs"
+      component: "NoviSteps5Q:exe:arc014b"
 
     - path: "./app/atmost3judgever/Main.hs"
       component: "NoviSteps5Q:exe:atmost3judgever"
@@ -93,6 +129,12 @@ cradle:
     - path: "./app/bricbreak/Paths_NoviSteps5Q.hs"
       component: "NoviSteps5Q:exe:bricbreak"
 
+    - path: "./app/bumblebee/Main.hs"
+      component: "NoviSteps5Q:exe:bumblebee"
+
+    - path: "./app/bumblebee/Paths_NoviSteps5Q.hs"
+      component: "NoviSteps5Q:exe:bumblebee"
+
     - path: "./app/buyonecartonofmilk/Main.hs"
       component: "NoviSteps5Q:exe:buyonecartonofmilk"
 
@@ -122,6 +164,12 @@ cradle:
 
     - path: "./app/centers/Paths_NoviSteps5Q.hs"
       component: "NoviSteps5Q:exe:centers"
+
+    - path: "./app/circularplaylist/Main.hs"
+      component: "NoviSteps5Q:exe:circularplaylist"
+
+    - path: "./app/circularplaylist/Paths_NoviSteps5Q.hs"
+      component: "NoviSteps5Q:exe:circularplaylist"
 
     - path: "./app/colorfulbeans/Main.hs"
       component: "NoviSteps5Q:exe:colorfulbeans"
@@ -315,6 +363,12 @@ cradle:
     - path: "./app/irohasobsession/Paths_NoviSteps5Q.hs"
       component: "NoviSteps5Q:exe:irohasobsession"
 
+    - path: "./app/joi2024yo2a/Main.hs"
+      component: "NoviSteps5Q:exe:joi2024yo2a"
+
+    - path: "./app/joi2024yo2a/Paths_NoviSteps5Q.hs"
+      component: "NoviSteps5Q:exe:joi2024yo2a"
+
     - path: "./app/joi2025a/Main.hs"
       component: "NoviSteps5Q:exe:joi2025a"
 
@@ -392,6 +446,12 @@ cradle:
 
     - path: "./app/movingballs/Paths_NoviSteps5Q.hs"
       component: "NoviSteps5Q:exe:movingballs"
+
+    - path: "./app/muliplegift/Main.hs"
+      component: "NoviSteps5Q:exe:muliplegift"
+
+    - path: "./app/muliplegift/Paths_NoviSteps5Q.hs"
+      component: "NoviSteps5Q:exe:muliplegift"
 
     - path: "./app/multiplication2/Main.hs"
       component: "NoviSteps5Q:exe:multiplication2"
@@ -506,6 +566,12 @@ cradle:
 
     - path: "./app/sccpuzzle/Paths_NoviSteps5Q.hs"
       component: "NoviSteps5Q:exe:sccpuzzle"
+
+    - path: "./app/seekgrid/Main.hs"
+      component: "NoviSteps5Q:exe:seekgrid"
+
+    - path: "./app/seekgrid/Paths_NoviSteps5Q.hs"
+      component: "NoviSteps5Q:exe:seekgrid"
 
     - path: "./app/signuprequests/Main.hs"
       component: "NoviSteps5Q:exe:signuprequests"

@@ -64,6 +64,94 @@ library:
   source-dirs: src
 
 executables:
+  abc236c:
+    main:               Main.hs
+    source-dirs:        app/abc236c
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - NoviSteps5Q
+
+  abc164c:
+    main:               Main.hs
+    source-dirs:        app/abc164c
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - NoviSteps5Q
+
+  abc154c:
+    main:               Main.hs
+    source-dirs:        app/abc154c
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - NoviSteps5Q
+
+  abc032a:
+    main:               Main.hs
+    source-dirs:        app/abc032a
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - NoviSteps5Q
+
+  abc032b:
+    main:               Main.hs
+    source-dirs:        app/abc032b
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - NoviSteps5Q
+
+  bumblebee:
+    main:               Main.hs
+    source-dirs:        app/bumblebee
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - NoviSteps5Q
+
+  joi2024yo2a:
+    main:               Main.hs
+    source-dirs:        app/joi2024yo2a
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - NoviSteps5Q
+
+  arc014b:
+    main:               Main.hs
+    source-dirs:        app/arc014b
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - NoviSteps5Q
+
+  seekgrid:
+    main:               Main.hs
+    source-dirs:        app/seekgrid
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - NoviSteps5Q
+
+  circularplaylist:
+    main:               Main.hs
+    source-dirs:        app/circularplaylist
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - NoviSteps5Q
+
+  muliplegift:
+    main:               Main.hs
+    source-dirs:        app/muliplegift
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - NoviSteps5Q
+
   geometricsequence:
     main:               Main.hs
     source-dirs:        app/geometricsequence

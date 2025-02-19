@@ -31,21 +31,23 @@ import Data.Vector qualified as V
 import Debug.Trace qualified as Debug
 
 debug :: Bool
-debug = () /= ()
+debug = () == ()
 
-type I = Int
+type I = String
 type O = Int
 
-type Solver = () -> ()
+type Solver = (String, Int) -> Int
 
 solve :: Solver
 solve = \ case
-    () -> ()
+    (s,k) 
+        | length s < k -> 0
+        | otherwise -> S.size $ S.fromList $ subsegments s !! pred k
 
 wrap :: Solver -> ([[I]] -> [[O]])
 wrap f = \ case
-    _:_ -> case f () of
-        _rr -> [[]]
+    [s]:[k]:_ -> case f (s,read k) of
+        r -> [[r]]
     _   -> error "wrap: invalid input format"
 
 main :: IO ()
@@ -63,10 +65,6 @@ class InterfaceForOJS a where
     showBs = B.unwords . map showB
     encode :: [[a]] -> B.ByteString
     encode = B.unlines . map showBs
-
-instance InterfaceForOJS B.ByteString where
-    readB = id
-    showB = id
 
 instance InterfaceForOJS Int where
     readB = readInt
@@ -114,6 +112,8 @@ trace :: String -> a -> a
 trace | debug     = Debug.trace
       | otherwise = const id
 
+tracing :: Show a => a -> a
+tracing = trace . show <*> id
 {- |
 >>> combinations 2 "abcd"
 ["ab","ac","ad","bc","bd","cd"]

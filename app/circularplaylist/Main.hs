@@ -36,16 +36,22 @@ debug = () /= ()
 type I = Int
 type O = Int
 
-type Solver = () -> ()
+type Solver = (I,[I]) -> [O]
 
 solve :: Solver
 solve = \ case
-    () -> ()
+    (t,as) -> case t `mod` sum as of
+        m      -> iter 0 m as where
+            iter c r = \ case
+                b:bs
+                    | r < b     -> [succ c, r]
+                    | otherwise -> iter (succ c) (r - b) bs
+                _ -> invalid
 
 wrap :: Solver -> ([[I]] -> [[O]])
 wrap f = \ case
-    _:_ -> case f () of
-        _rr -> [[]]
+    [_,t]:as:_ -> case f (t,as) of
+        rr -> [rr]
     _   -> error "wrap: invalid input format"
 
 main :: IO ()
@@ -63,10 +69,6 @@ class InterfaceForOJS a where
     showBs = B.unwords . map showB
     encode :: [[a]] -> B.ByteString
     encode = B.unlines . map showBs
-
-instance InterfaceForOJS B.ByteString where
-    readB = id
-    showB = id
 
 instance InterfaceForOJS Int where
     readB = readInt
