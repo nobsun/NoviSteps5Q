@@ -51,6 +51,30 @@ cradle:
     - path: "./app/abc236c/Paths_NoviSteps5Q.hs"
       component: "NoviSteps5Q:exe:abc236c"
 
+    - path: "./app/abc394b/Main.hs"
+      component: "NoviSteps5Q:exe:abc394b"
+
+    - path: "./app/abc394b/Paths_NoviSteps5Q.hs"
+      component: "NoviSteps5Q:exe:abc394b"
+
+    - path: "./app/abc395b/Main.hs"
+      component: "NoviSteps5Q:exe:abc395b"
+
+    - path: "./app/abc395b/Paths_NoviSteps5Q.hs"
+      component: "NoviSteps5Q:exe:abc395b"
+
+    - path: "./app/abc396b/Main.hs"
+      component: "NoviSteps5Q:exe:abc396b"
+
+    - path: "./app/abc396b/Paths_NoviSteps5Q.hs"
+      component: "NoviSteps5Q:exe:abc396b"
+
+    - path: "./app/abc397b/Main.hs"
+      component: "NoviSteps5Q:exe:abc397b"
+
+    - path: "./app/abc397b/Paths_NoviSteps5Q.hs"
+      component: "NoviSteps5Q:exe:abc397b"
+
     - path: "./app/abcdef/Main.hs"
       component: "NoviSteps5Q:exe:abcdef"
 
@@ -86,6 +110,12 @@ cradle:
 
     - path: "./app/arc014b/Paths_NoviSteps5Q.hs"
       component: "NoviSteps5Q:exe:arc014b"
+
+    - path: "./app/arc033b/Main.hs"
+      component: "NoviSteps5Q:exe:arc033b"
+
+    - path: "./app/arc033b/Paths_NoviSteps5Q.hs"
+      component: "NoviSteps5Q:exe:arc033b"
 
     - path: "./app/atmost3judgever/Main.hs"
       component: "NoviSteps5Q:exe:atmost3judgever"
