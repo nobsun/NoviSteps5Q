@@ -34,23 +34,13 @@ debug :: Bool
 debug = () /= ()
 
 type I = Int
-type O = Int
+type O = String
 
 type Solver = I -> O
 
 solve :: Solver
 solve = \ case
-    n -> iter 0 n where
-        iter c = \ case
-            0 -> c
-            m | unlucky7 m -> iter (succ c) (pred m)
-              | otherwise  -> iter c (pred m)
-
-unlucky7 :: Int -> Bool
-unlucky7 = \ case
-    n | '7' `elem` show n -> False
-      | "111" `elem` splitEvery 3 (reverse (printf "%b" n)) -> False
-      | otherwise -> True
+    n -> bool "BOWWOW" "WANWAN" (n == 2)
 
 wrap :: Solver -> ([[I]] -> [[O]])
 wrap f = \ case
@@ -245,3 +235,5 @@ mvRwhile p = \ case
     ascbs@(_,c,_)
         | p c       -> mvRwhile p (mvR ascbs)
         | otherwise -> ascbs
+
+

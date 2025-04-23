@@ -38,25 +38,36 @@ debug :: Bool
 debug = () /= ()
 
 type I = Int
-type O = Int
+type O = String
 
-type Dom   = ()
-type Codom = ()
+type Dom   = I
+type Codom = O
 
 type Solver = Dom -> Codom
 
 solve :: Solver
 solve = \ case
-    () -> ()
+    n -> ordering "Deficient" "Perfect" "Abundant" (compare wa (2*n)) where
+        wa = sum $ dbl =<< [1 :: Int .. fromInteger (sqrtI (toInteger n))]
+        dbl m = case divMod n m of
+            (q,0) | m == q    -> [m]
+                  | otherwise -> [m,q]
+            _                 -> []
+            
+ordering :: a -> a -> a -> Ordering -> a
+ordering x y z = \ case
+    LT -> x
+    EQ -> y
+    GT -> z
 
 toDom     :: [[I]] -> Dom
 toDom     = \ case
-    _:_ -> ()
+    [n]:_ -> n
     _   -> invalid $ "toDom: " ++ show @Int __LINE__
 
 fromCodom :: Codom -> [[O]]
 fromCodom = \ case
-    _rr -> [[]]
+    r -> [[r]]
 
 wrap :: Solver -> ([[I]] -> [[O]])
 wrap f = fromCodom . f . toDom

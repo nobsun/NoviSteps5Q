@@ -33,28 +33,26 @@ import Debug.Trace qualified as Debug
 debug :: Bool
 debug = () /= ()
 
-type I = Int
-type O = Int
+type I = Integer
+type O = Integer
 
-type Solver = I -> O
+type Solver = (I,I,[(I,I)]) -> O
 
 solve :: Solver
 solve = \ case
-    n -> iter 0 n where
-        iter c = \ case
-            0 -> c
-            m | unlucky7 m -> iter (succ c) (pred m)
-              | otherwise  -> iter c (pred m)
-
-unlucky7 :: Int -> Bool
-unlucky7 = \ case
-    n | '7' `elem` show n -> False
-      | "111" `elem` splitEvery 3 (reverse (printf "%b" n)) -> False
-      | otherwise -> True
+    (_n,k,cs) -> iter 0 k cs' where
+        iter p q = \ case
+            [] -> pq
+            (p',q'):pqs
+                | pq >= p' -> iter p' (pq - p' + q') pqs
+                | otherwise -> pq
+            where
+                pq = p + q
+        cs' = sort cs
 
 wrap :: Solver -> ([[I]] -> [[O]])
 wrap f = \ case
-    [n]:_ -> case f n of
+    [n,k]:cs -> case f (n,k,toTuple <$> cs) of
         r -> [[r]]
     _   -> error "wrap: invalid input format"
 
@@ -82,6 +80,10 @@ instance InterfaceForOJS Int where
     readB = readInt
     showB = showInt
 
+instance InterfaceForOJS Integer where
+    readB = readInteger
+    showB = showInteger
+
 instance InterfaceForOJS String where
     readB = readStr
     showB = showStr
@@ -101,6 +103,12 @@ readInt = fst . fromJust . B.readInt
 
 showInt :: Int -> B.ByteString
 showInt = B.pack . show
+
+readInteger :: B.ByteString -> Integer
+readInteger = fst . fromJust . B.readInteger
+
+showInteger :: Integer -> B.ByteString
+showInteger = B.pack . show
 
 readStr :: B.ByteString -> String
 readStr = B.unpack
@@ -245,3 +253,5 @@ mvRwhile p = \ case
     ascbs@(_,c,_)
         | p c       -> mvRwhile p (mvR ascbs)
         | otherwise -> ascbs
+
+

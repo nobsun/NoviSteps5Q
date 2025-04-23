@@ -64,6 +64,86 @@ library:
   source-dirs: src
 
 executables:
+  arc017a:
+    main:               Main.hs
+    source-dirs:        app/arc017a
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - NoviSteps5Q
+
+  abc187c:
+    main:               Main.hs
+    source-dirs:        app/abc187c
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - NoviSteps5Q
+
+  arc026b:
+    main:               Main.hs
+    source-dirs:        app/arc026b
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - NoviSteps5Q
+
+  abc149c:
+    main:               Main.hs
+    source-dirs:        app/abc149c
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - NoviSteps5Q
+
+  arc032a:
+    main:               Main.hs
+    source-dirs:        app/arc032a
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - NoviSteps5Q
+
+  abc315c:
+    main:               Main.hs
+    source-dirs:        app/abc315c
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - NoviSteps5Q
+
+  abc132c:
+    main:               Main.hs
+    source-dirs:        app/abc132c
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - NoviSteps5Q
+
+  abc134c:
+    main:               Main.hs
+    source-dirs:        app/abc134c
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - NoviSteps5Q
+
+  abc203c:
+    main:               Main.hs
+    source-dirs:        app/abc203c
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - NoviSteps5Q
+
+  abc272c:
+    main:               Main.hs
+    source-dirs:        app/abc272c
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - NoviSteps5Q
+
   abc186c:
     main:               Main.hs
     source-dirs:        app/abc186c

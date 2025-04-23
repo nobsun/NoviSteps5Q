@@ -25,6 +25,7 @@ import Data.Function
 import Data.List
 import Text.Printf
 
+import Data.Monoid
 import Data.IntMap qualified as IM
 import Data.IntSet qualified as IS
 import Data.Map qualified as M
@@ -35,28 +36,30 @@ import Data.Vector qualified as V
 import Debug.Trace qualified as Debug
 
 debug :: Bool
-debug = () /= ()
+debug = () == ()
 
-type I = Int
-type O = Int
+type I = String
+type O = String
 
-type Dom   = ()
-type Codom = ()
+type Dom   = [I]
+type Codom = O
 
 type Solver = Dom -> Codom
 
 solve :: Solver
 solve = \ case
-    () -> ()
+    ss -> bool (S.elemAt 0 cap) "satisfiable" (S.null cap) where
+        cap = uncurry S.intersection $ S.fromList . map (drop 1) *** S.fromList
+            $ partition (("!" ==) . take 1) ss
 
 toDom     :: [[I]] -> Dom
 toDom     = \ case
-    _:_ -> ()
+    _:ss -> concat ss
     _   -> invalid $ "toDom: " ++ show @Int __LINE__
 
 fromCodom :: Codom -> [[O]]
 fromCodom = \ case
-    _rr -> [[]]
+    r -> [[r]]
 
 wrap :: Solver -> ([[I]] -> [[O]])
 wrap f = fromCodom . f . toDom

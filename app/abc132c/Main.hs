@@ -36,25 +36,21 @@ debug = () /= ()
 type I = Int
 type O = Int
 
-type Solver = I -> O
+type Solver = (I,[I]) -> O
 
 solve :: Solver
 solve = \ case
-    n -> iter 0 n where
-        iter c = \ case
-            0 -> c
-            m | unlucky7 m -> iter (succ c) (pred m)
-              | otherwise  -> iter c (pred m)
+    (n,as) -> iter n 0 (sort as) where
+        iter c h = \ case
+            t:ts -> case c of
+                0 | h < t -> t - h
+                  | otherwise -> 0
+                _ -> iter (pred c) t ts
 
-unlucky7 :: Int -> Bool
-unlucky7 = \ case
-    n | '7' `elem` show n -> False
-      | "111" `elem` splitEvery 3 (reverse (printf "%b" n)) -> False
-      | otherwise -> True
 
 wrap :: Solver -> ([[I]] -> [[O]])
 wrap f = \ case
-    [n]:_ -> case f n of
+    [n]:as:_ -> case f (n `div` 2, as) of
         r -> [[r]]
     _   -> error "wrap: invalid input format"
 
@@ -245,3 +241,5 @@ mvRwhile p = \ case
     ascbs@(_,c,_)
         | p c       -> mvRwhile p (mvR ascbs)
         | otherwise -> ascbs
+
+
