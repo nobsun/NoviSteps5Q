@@ -64,6 +64,14 @@ library:
   source-dirs: src
 
 executables:
+  csr002g:
+    main:               Main.hs
+    source-dirs:        app/csr002g
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - NoviSteps5Q
+
   arc017a:
     main:               Main.hs
     source-dirs:        app/arc017a

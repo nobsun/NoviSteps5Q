@@ -339,6 +339,12 @@ cradle:
     - path: "./app/countxxx/Paths_NoviSteps5Q.hs"
       component: "NoviSteps5Q:exe:countxxx"
 
+    - path: "./app/csr002g/Main.hs"
+      component: "NoviSteps5Q:exe:csr002g"
+
+    - path: "./app/csr002g/Paths_NoviSteps5Q.hs"
+      component: "NoviSteps5Q:exe:csr002g"
+
     - path: "./app/digitsinmultiplication/Main.hs"
       component: "NoviSteps5Q:exe:digitsinmultiplication"
 
