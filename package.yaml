@@ -64,6 +64,62 @@ library:
   source-dirs: src
 
 executables:
+  agc025a:
+    main:               Main.hs
+    source-dirs:        app/agc025a
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - NoviSteps5Q
+
+  abc180c:
+    main:               Main.hs
+    source-dirs:        app/abc180c
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - NoviSteps5Q
+
+  abc152c:
+    main:               Main.hs
+    source-dirs:        app/abc152c
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - NoviSteps5Q
+
+  abc086c:
+    main:               Main.hs
+    source-dirs:        app/abc086c
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - NoviSteps5Q
+
+  typi90-020:
+    main:               Main.hs
+    source-dirs:        app/typi90-020
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - NoviSteps5Q
+
+  abc148c:
+    main:               Main.hs
+    source-dirs:        app/abc148c
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - NoviSteps5Q
+
+  abc170c:
+    main:               Main.hs
+    source-dirs:        app/abc170c
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - NoviSteps5Q
+
   csr002g:
     main:               Main.hs
     source-dirs:        app/csr002g

@@ -40,23 +40,23 @@ debug = () /= ()
 type I = Int
 type O = Int
 
-type Dom   = ()
-type Codom = ()
+type Dom   = I
+type Codom = [O]
 
 type Solver = Dom -> Codom
 
 solve :: Solver
 solve = \ case
-    () -> ()
+    n -> IS.toList $ factors n
 
 toDom     :: [[I]] -> Dom
 toDom     = \ case
-    _:_ -> ()
+    [n]:_ -> n
     _   -> invalid $ "toDom: " ++ show @Int __LINE__
 
 fromCodom :: Codom -> [[O]]
 fromCodom = \ case
-    _rr -> [[]]
+    rr -> singleton <$> rr
 
 wrap :: Solver -> ([[I]] -> [[O]])
 wrap f = fromCodom . f . toDom
@@ -475,6 +475,15 @@ mexpt !b = \ case
       | otherwise -> mexpt (mmul b b) (o `div` 2)
 
 {- prime numbers -}
+factors :: Int -> IS.IntSet
+factors n = iter IS.empty [1 .. isqrt n]
+    where
+        iter s = \ case
+            [] -> s
+            m:ms -> case divMod n m of
+                (q,0) -> iter (IS.insert m (IS.insert q s)) ms
+                _     -> iter s ms
+
 primeFactors :: Int -> [Int]
 primeFactors n = unfoldr f (n,2)
     where
@@ -482,9 +491,9 @@ primeFactors n = unfoldr f (n,2)
             (1,_) -> Nothing
             (m,p) | m < p^!2  -> Just (m,(1,m))
                   | otherwise -> case divMod m p of
-                (q,0)           -> Just (p,(q,p))
-                _   | p == 2    -> f (m,3)
-                    | otherwise -> f (m,p+2)
+                (q,0) -> Just (p,(q,p))
+                _ | p == 2    -> f (m,3)
+                  | otherwise -> f (m,p+2)
 
 primesLT1000 :: [Int]
 primesLT1000

@@ -40,23 +40,28 @@ debug = () /= ()
 type I = Int
 type O = Int
 
-type Dom   = ()
-type Codom = ()
+type Dom   = (I,[I])
+type Codom = O
 
 type Solver = Dom -> Codom
 
 solve :: Solver
 solve = \ case
-    () -> ()
+    (n,ps) -> iter 0 (succ n) ps where
+        iter c x = \ case
+            [] -> c
+            y:ys
+                | y <= x    -> iter (succ c) y ys
+                | otherwise -> iter c x ys
 
 toDom     :: [[I]] -> Dom
 toDom     = \ case
-    _:_ -> ()
+    [n]:ps:_ -> (n,ps)
     _   -> invalid $ "toDom: " ++ show @Int __LINE__
 
 fromCodom :: Codom -> [[O]]
 fromCodom = \ case
-    _rr -> [[]]
+    r -> [[r]]
 
 wrap :: Solver -> ([[I]] -> [[O]])
 wrap f = fromCodom . f . toDom
@@ -482,9 +487,9 @@ primeFactors n = unfoldr f (n,2)
             (1,_) -> Nothing
             (m,p) | m < p^!2  -> Just (m,(1,m))
                   | otherwise -> case divMod m p of
-                (q,0)           -> Just (p,(q,p))
-                _   | p == 2    -> f (m,3)
-                    | otherwise -> f (m,p+2)
+                (q,0) -> Just (p,(q,p))
+                _ | p == 2    -> f (m,3)
+                  | otherwise -> f (m,p+2)
 
 primesLT1000 :: [Int]
 primesLT1000

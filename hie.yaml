@@ -33,6 +33,12 @@ cradle:
     - path: "./app/abc032b/Paths_NoviSteps5Q.hs"
       component: "NoviSteps5Q:exe:abc032b"
 
+    - path: "./app/abc086c/Main.hs"
+      component: "NoviSteps5Q:exe:abc086c"
+
+    - path: "./app/abc086c/Paths_NoviSteps5Q.hs"
+      component: "NoviSteps5Q:exe:abc086c"
+
     - path: "./app/abc132c/Main.hs"
       component: "NoviSteps5Q:exe:abc132c"
 
@@ -45,11 +51,23 @@ cradle:
     - path: "./app/abc134c/Paths_NoviSteps5Q.hs"
       component: "NoviSteps5Q:exe:abc134c"
 
+    - path: "./app/abc148c/Main.hs"
+      component: "NoviSteps5Q:exe:abc148c"
+
+    - path: "./app/abc148c/Paths_NoviSteps5Q.hs"
+      component: "NoviSteps5Q:exe:abc148c"
+
     - path: "./app/abc149c/Main.hs"
       component: "NoviSteps5Q:exe:abc149c"
 
     - path: "./app/abc149c/Paths_NoviSteps5Q.hs"
       component: "NoviSteps5Q:exe:abc149c"
+
+    - path: "./app/abc152c/Main.hs"
+      component: "NoviSteps5Q:exe:abc152c"
+
+    - path: "./app/abc152c/Paths_NoviSteps5Q.hs"
+      component: "NoviSteps5Q:exe:abc152c"
 
     - path: "./app/abc154c/Main.hs"
       component: "NoviSteps5Q:exe:abc154c"
@@ -62,6 +80,18 @@ cradle:
 
     - path: "./app/abc164c/Paths_NoviSteps5Q.hs"
       component: "NoviSteps5Q:exe:abc164c"
+
+    - path: "./app/abc170c/Main.hs"
+      component: "NoviSteps5Q:exe:abc170c"
+
+    - path: "./app/abc170c/Paths_NoviSteps5Q.hs"
+      component: "NoviSteps5Q:exe:abc170c"
+
+    - path: "./app/abc180c/Main.hs"
+      component: "NoviSteps5Q:exe:abc180c"
+
+    - path: "./app/abc180c/Paths_NoviSteps5Q.hs"
+      component: "NoviSteps5Q:exe:abc180c"
 
     - path: "./app/abc186c/Main.hs"
       component: "NoviSteps5Q:exe:abc186c"
@@ -158,6 +188,12 @@ cradle:
 
     - path: "./app/adjacentvertices/Paths_NoviSteps5Q.hs"
       component: "NoviSteps5Q:exe:adjacentvertices"
+
+    - path: "./app/agc025a/Main.hs"
+      component: "NoviSteps5Q:exe:agc025a"
+
+    - path: "./app/agc025a/Paths_NoviSteps5Q.hs"
+      component: "NoviSteps5Q:exe:agc025a"
 
     - path: "./app/agedeference/Main.hs"
       component: "NoviSteps5Q:exe:agedeference"
@@ -806,6 +842,12 @@ cradle:
 
     - path: "./app/tshirts/Paths_NoviSteps5Q.hs"
       component: "NoviSteps5Q:exe:tshirts"
+
+    - path: "./app/typi90-020/Main.hs"
+      component: "NoviSteps5Q:exe:typi90-020"
+
+    - path: "./app/typi90-020/Paths_NoviSteps5Q.hs"
+      component: "NoviSteps5Q:exe:typi90-020"
 
     - path: "./app/typing/Main.hs"
       component: "NoviSteps5Q:exe:typing"

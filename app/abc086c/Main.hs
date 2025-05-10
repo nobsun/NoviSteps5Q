@@ -38,25 +38,33 @@ debug :: Bool
 debug = () /= ()
 
 type I = Int
-type O = Int
+type O = String
 
-type Dom   = ()
-type Codom = ()
+type Dom   = [[I]]
+type Codom = O
 
 type Solver = Dom -> Codom
 
 solve :: Solver
 solve = \ case
-    () -> ()
+    txys -> iter $ zipWith phi ([0,0,0]:txys) $ txys where
+        phi [t1,x1,y1] [t2,x2,y2] = (subtract t1 t2, abs (x1 - x2) + abs (y1 - y2))
+        phi _ _ = invalid ""
+        iter = \ case
+            (dt,dd):rs
+                | dt < dd       -> "No"
+                | odd (dt - dd) -> "No"
+                | otherwise     -> iter rs
+            _                   -> "Yes"
 
 toDom     :: [[I]] -> Dom
 toDom     = \ case
-    _:_ -> ()
+    _:txys -> txys
     _   -> invalid $ "toDom: " ++ show @Int __LINE__
 
 fromCodom :: Codom -> [[O]]
 fromCodom = \ case
-    _rr -> [[]]
+    r -> [[r]]
 
 wrap :: Solver -> ([[I]] -> [[O]])
 wrap f = fromCodom . f . toDom
@@ -475,16 +483,6 @@ mexpt !b = \ case
       | otherwise -> mexpt (mmul b b) (o `div` 2)
 
 {- prime numbers -}
-primeFactors :: Int -> [Int]
-primeFactors n = unfoldr f (n,2)
-    where
-        f = \ case
-            (1,_) -> Nothing
-            (m,p) | m < p^!2  -> Just (m,(1,m))
-                  | otherwise -> case divMod m p of
-                (q,0)           -> Just (p,(q,p))
-                _   | p == 2    -> f (m,3)
-                    | otherwise -> f (m,p+2)
 
 primesLT1000 :: [Int]
 primesLT1000
