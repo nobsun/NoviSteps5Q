@@ -135,6 +135,12 @@ cradle:
     - path: "./app/abc280c/Paths_NoviSteps5Q.hs"
       component: "NoviSteps5Q:exe:abc280c"
 
+    - path: "./app/abc282c/Main.hs"
+      component: "NoviSteps5Q:exe:abc282c"
+
+    - path: "./app/abc282c/Paths_NoviSteps5Q.hs"
+      component: "NoviSteps5Q:exe:abc282c"
+
     - path: "./app/abc315c/Main.hs"
       component: "NoviSteps5Q:exe:abc315c"
 
