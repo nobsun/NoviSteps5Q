@@ -7,7 +7,7 @@
 {-# LANGUAGE NPlusKPatterns #-}
 {-# LANGUAGE DataKinds, PolyKinds, NoStarIsType, TypeFamilyDependencies, UndecidableInstances #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# OPTIONS_GHC -Wno-unused-imports #-}
+{-# OPTIONS_GHC -Wno-unused-imports, -Wno-x-partial #-}
 module Main where
 
 import Data.ByteString.Char8 qualified as B
@@ -17,6 +17,7 @@ import Data.Ord
 import Control.Arrow
 import Control.Applicative
 import Control.Monad
+import Control.Monad.State
 import Data.Array
 import Data.Array.Unboxed qualified as A
 import Data.Bits
@@ -26,6 +27,7 @@ import Data.Function
 import Data.List
 import Data.List.Extra
 import Data.Monoid
+import Data.Tuple
 import Text.Printf
 
 import Data.IntMap qualified as IM
@@ -47,23 +49,27 @@ debug = () /= ()
 type I = Int
 type O = Int
 
-type Dom   = ()
-type Codom = ()
+type Dom   = (I,I,I,I)
+type Codom = O
 
 type Solver = Dom -> Codom
 
 solve :: Solver
 solve = \ case
-    () -> ()
+    (a,b,c,n) -> case sort [a,b,c] of
+        a':b':c':_ -> case map ((`subtract` n) . (c' *)) [0 .. div n c'] of
+            xys -> undefined
+        _          -> impossible ""
+
 
 decode :: [[I]] -> Dom
 decode = \ case
-    _:_ -> ()
+    [a,b,c,n]:_ -> (a,b,c,n)
     _   -> invalid $ "toDom: " ++ show @Int __LINE__
 
 encode :: Codom -> [[O]]
 encode = \ case
-    _rr -> [[]]
+    r -> [[r]]
 
 main :: IO ()
 main = B.interact (detokenize . encode . solve . decode . entokenize)
@@ -872,5 +878,76 @@ ksSelections ubw = foldl' step ?ksSelectionArray0 where
                     [ (r1, (?addName n (fst3 s), v + ksValue s, w + ksWeight s))
                     | (r,s) <- assocs aa, let r1 = r + w, r1 <= ubw]
     better sn1 sn2 = if ksValue sn1 >= ksValue sn2 then sn1 else sn2
+
+{- Yet Another Memoise -}
+class MemoTable t where
+    emptyMemoTable  :: Ord a => t a b
+    lookupMemoTable :: Ord a => a -> t a b -> Maybe b
+    insertMemoTable :: Ord a => a -> b -> t a b -> t a b
+
+class (Monad m) => MemoTableT t m where
+    emptyMemoTableT  :: Ord a => t a (m b)
+    lookupMemoTableT :: Ord a => a -> t a (m b) -> Maybe (m b)
+    insertMemoTableT :: Ord a => a -> m b -> t a (m b) -> t a (m b)
+
+instance MemoTable M.Map where
+    emptyMemoTable  = M.empty
+    lookupMemoTable = M.lookup
+    insertMemoTable = M.insert
+
+instance MemoTableT M.Map [] where
+    emptyMemoTableT  = M.empty
+    lookupMemoTableT = M.lookup
+    insertMemoTableT = M.insert
+
+instance (Applicative f, Num a) => Num (f a) where
+    (+) = (<*>) . ((+) <$>)
+    (-) = (<*>) . ((-) <$>)
+    (*) = (<*>) . ((*) <$>)
+    negate = (negate <$>)
+    signum = (signum <$>)
+    abs    = (abs    <$>)
+    fromInteger = pure . fromInteger
+
+type Memo t a b = a -> State (t a b) b
+
+memoise :: (MemoTable t, Ord a) => Memo t a b -> Memo t a b
+memoise mf x = do prev <- find x
+                  case prev of
+                    Just y  -> return y
+                    Nothing -> do y    <- mf x
+                                  ins x y
+                                  return y
+               where find k  = get >>= return . lookupMemoTable k
+                     ins k v = get >>= put . insertMemoTable k v
+
+evalMemo :: (MemoTable t, Ord a) => (Memo t) a b -> a -> b
+evalMemo m v = evalState (m v) emptyMemoTable
+
+runMemo :: (MemoTable t, Ord a) => t a b -> (Memo t) a b -> a -> (b, t a b)
+runMemo tb m v = runState (m v) tb
+
+gfun :: (b -> c) -> (c -> b) -> c
+gfun = (fix .) . (.)
+
+memoising :: (Ord a, MemoTable t)
+          => ((a -> State (t a b) b) -> Memo t a b) -> a -> State (t a b) b
+memoising = gfun memoise
+
+-- | makes memo function from functional specified by the second argument.
+--   The first argument is only for imforming type of memo table will be used.
+memo :: (MemoTable t, Ord a)
+     => (a -> State (t a b) b)
+     -> ((a -> State (t a b) b) -> Memo t a b)
+     -> (a -> b)
+memo g f = evalMemo (asTypeOf (memoising f) g)
+
+-- | makes memo function which also takes and returns memo table
+-- , which can be reused.
+memo' :: (MemoTable t, Ord a)
+     => ((a -> State (t a b) b) -> Memo t a b)
+     -> t a b
+     -> (a -> (t a b, b))
+memo' = ((swap .) .) . flip runMemo . memoising
 
 {- End of Bonsai -}

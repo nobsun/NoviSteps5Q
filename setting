@@ -1,8 +1,14 @@
-#!/bin/zsh
+#!/bin/bash
 
-add-entry $1
-echo "export CURRENT_ATCODER_EXE_NAME=$1" >! .curname
+stack exec -- add-entry $1
+
+echo "export CURRENT_STACK_EXE_ENTRY=$1" > .curname
 
 stack build NoviSteps5Q:exe:$1
 
-gen-hie >! hie.yaml
+if type "gen-hie" > /dev/null 2>&1; then
+  gen-hie > hie.yaml
+else
+  stack install implicit-hie
+  gen-hie > hie.yaml
+fi

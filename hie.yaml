@@ -111,6 +111,24 @@ cradle:
     - path: "./app/abc203c/Paths_NoviSteps5Q.hs"
       component: "NoviSteps5Q:exe:abc203c"
 
+    - path: "./app/abc217c/Main.hs"
+      component: "NoviSteps5Q:exe:abc217c"
+
+    - path: "./app/abc217c/Paths_NoviSteps5Q.hs"
+      component: "NoviSteps5Q:exe:abc217c"
+
+    - path: "./app/abc219c/Main.hs"
+      component: "NoviSteps5Q:exe:abc219c"
+
+    - path: "./app/abc219c/Paths_NoviSteps5Q.hs"
+      component: "NoviSteps5Q:exe:abc219c"
+
+    - path: "./app/abc220c/Main.hs"
+      component: "NoviSteps5Q:exe:abc220c"
+
+    - path: "./app/abc220c/Paths_NoviSteps5Q.hs"
+      component: "NoviSteps5Q:exe:abc220c"
+
     - path: "./app/abc236c/Main.hs"
       component: "NoviSteps5Q:exe:abc236c"
 
@@ -188,6 +206,12 @@ cradle:
 
     - path: "./app/abcdef/Paths_NoviSteps5Q.hs"
       component: "NoviSteps5Q:exe:abcdef"
+
+    - path: "./app/zzz/add-entry/Main.hs"
+      component: "NoviSteps5Q:exe:add-entry"
+
+    - path: "./app/zzz/add-entry/Paths_NoviSteps5Q.hs"
+      component: "NoviSteps5Q:exe:add-entry"
 
     - path: "./app/adjacencylist/Main.hs"
       component: "NoviSteps5Q:exe:adjacencylist"
@@ -854,6 +878,12 @@ cradle:
 
     - path: "./app/tshirts/Paths_NoviSteps5Q.hs"
       component: "NoviSteps5Q:exe:tshirts"
+
+    - path: "./app/typi90-016/Main.hs"
+      component: "NoviSteps5Q:exe:typi90-016"
+
+    - path: "./app/typi90-016/Paths_NoviSteps5Q.hs"
+      component: "NoviSteps5Q:exe:typi90-016"
 
     - path: "./app/typi90-020/Main.hs"
       component: "NoviSteps5Q:exe:typi90-020"

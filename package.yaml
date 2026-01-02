@@ -1,10 +1,10 @@
 name:                NoviSteps5Q
-version:             0.0.0
+version:             0.227.0
 github:              nobsun/NoviSteps5Q
 license:             BSD3
 author:              Nobuo Yamashita
 maintainer:          nobsun@sampou.org
-copyright:           © 2024, Nobuo Yamashita
+copyright:           © 2024-2026, Nobuo Yamashita
 
 extra-source-files:
 - README.md
@@ -33,6 +33,10 @@ dependencies:
 - mod
 - array
 - containers
+- filepath
+- directory
+- extra
+- mtl
 - free
 - recursion-schemes
 - vector
@@ -59,11 +63,52 @@ ghc-options:
 - -Wno-unused-imports
 - -Wno-unused-top-binds
 - -Wno-orphans
+- -Wno-x-partial
 
 library:
   source-dirs: src
 
 executables:
+  typi90-016:
+    main:               Main.hs
+    source-dirs:        app/typi90-016
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - NoviSteps5Q
+
+  add-entry:
+    main:               Main.hs
+    source-dirs:        app/zzz/add-entry
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - NoviSteps5Q
+    
+  abc217c:
+    main:               Main.hs
+    source-dirs:        app/abc217c
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - NoviSteps5Q
+
+  abc219c:
+    main:               Main.hs
+    source-dirs:        app/abc219c
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - NoviSteps5Q
+
+  abc220c:
+    main:               Main.hs
+    source-dirs:        app/abc220c
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - NoviSteps5Q
+
   abc282c:
     main:               Main.hs
     source-dirs:        app/abc282c

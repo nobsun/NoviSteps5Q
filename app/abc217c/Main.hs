@@ -1,0 +1,806 @@
+{-# LANGUAGE CPP #-}
+{-# LANGUAGE GHC2021 #-}
+{-# LANGUAGE ImplicitParams #-}
+{-# LANGUAGE ImportQualifiedPost #-}
+{-# LANGUAGE LexicalNegation #-}
+{-# LANGUAGE LambdaCase, MultiWayIf #-}
+{-# LANGUAGE NPlusKPatterns #-}
+{-# LANGUAGE DataKinds, PolyKinds, NoStarIsType, TypeFamilyDependencies, UndecidableInstances #-}
+{-# LANGUAGE OverloadedStrings #-}
+module Main where
+
+import Data.ByteString.Char8 qualified as B
+import Data.Maybe
+import Data.Ord
+
+import Control.Arrow
+import Control.Applicative
+import Control.Monad
+import Data.Array
+import Data.Array.Unboxed qualified as A
+import Data.Bits
+import Data.Bool
+import Data.Char
+import Data.Function
+import Data.List
+import Text.Printf
+
+import Data.IntMap qualified as IM
+import Data.IntSet qualified as IS
+import Data.Map qualified as M
+import Data.Set qualified as S
+import Data.Tree qualified as T
+import Data.Sequence qualified as Q
+import Data.Vector.Unboxed qualified as V
+
+import Debug.Trace qualified as Debug
+
+debug :: Bool
+debug = () /= ()
+
+base :: Int
+base = 10^(9::Int) + 7
+
+factCacheSize :: Int
+factCacheSize = 4 * 10 ^! 6
+
+type I = Int
+type O = Int
+
+type Dom   = (I,[I])
+type Codom = [O]
+
+type Solver = Dom -> Codom
+
+solve :: Solver
+solve = \ case
+    (n,ps) -> elems $ array (1,n) $ zip ps [1 ..]
+
+decode :: [[I]] -> Dom
+decode = \ case
+    [n]:ps:_ -> (n,ps)
+    _   -> invalid $ "toDom: " ++ show @Int __LINE__
+
+encode :: Codom -> [[O]]
+encode = \ case
+    rr -> [rr]
+
+main :: IO ()
+main = B.interact (detokenize . encode . solve . decode . entokenize)
+
+class AsToken a where
+    readB :: B.ByteString -> a
+    readBs :: B.ByteString -> [a]
+    readBs = map readB . B.words
+    entokenize :: B.ByteString -> [[a]]
+    entokenize = map readBs . B.lines
+
+    showB :: a -> B.ByteString
+    showBs :: [a] -> B.ByteString
+    showBs = B.unwords . map showB
+    detokenize :: [[a]] -> B.ByteString
+    detokenize = B.unlines . map showBs
+
+instance AsToken B.ByteString where
+    readB :: B.ByteString -> B.ByteString
+    readB = id
+    showB :: B.ByteString -> B.ByteString
+    showB = id
+
+instance AsToken Int where
+    readB :: B.ByteString -> Int
+    readB = readInt
+    showB :: Int -> B.ByteString
+    showB = showInt
+
+instance AsToken Integer where
+    readB :: B.ByteString -> Integer
+    readB = readInteger
+    showB :: Integer -> B.ByteString
+    showB = showInteger
+
+instance AsToken String where
+    readB :: B.ByteString -> String
+    readB = readStr
+    showB :: String -> B.ByteString
+    showB = showStr
+
+instance AsToken Double where
+    readB :: B.ByteString -> Double
+    readB = readDbl
+    showB :: Double -> B.ByteString
+    showB = showDbl
+
+instance AsToken Char where
+    readB :: B.ByteString -> Char
+    readB = B.head
+    showB :: Char -> B.ByteString
+    showB = B.singleton
+    readBs :: B.ByteString -> [Char]
+    readBs = B.unpack
+    showBs :: [Char] -> B.ByteString
+    showBs = B.pack
+
+readInt :: B.ByteString -> Int
+readInt = fst . fromJust . B.readInt
+
+showInt :: Int -> B.ByteString
+showInt = B.pack . show
+
+readInteger :: B.ByteString -> Integer
+readInteger = fst . fromJust . B.readInteger
+
+showInteger :: Integer -> B.ByteString
+showInteger = B.pack . show
+
+readStr :: B.ByteString -> String
+readStr = B.unpack
+
+showStr :: String -> B.ByteString
+showStr = B.pack
+
+readDbl :: B.ByteString -> Double
+readDbl = read . B.unpack
+
+showDbl :: Double -> B.ByteString
+showDbl = B.pack . show
+
+{- debug -}
+trace :: String -> a -> a
+trace | debug     = Debug.trace
+      | otherwise = const id
+
+tracing :: Show a => a -> a
+tracing = trace . show <*> id
+
+{- error -}
+impossible :: String -> a
+impossible msg = error $ msg ++ ", impossible"
+
+invalid :: String -> a
+invalid msg = error $ msg ++ ", invalid input"
+
+{- Bonsai -}
+
+{- TreeCon -}
+class Functor t => TreeCon t where
+    branches :: t a -> [t a]
+
+dfs :: TreeCon t => t a  -> [t a]
+dfs t = t : concatMap dfs (branches t)
+
+bfs :: TreeCon t => t a -> [t a]
+bfs = concat . levels 
+
+levels :: TreeCon t => t a -> [[t a]]
+levels t = [t] : foldr (lgzw (++)) [] (map levels (branches t))
+
+lgzw :: (a -> a -> a) -> [a] -> [a] -> [a]
+lgzw f (x:xs) (y:ys) = f x y : lgzw f xs ys
+lgzw _ xs [] = xs
+lgzw _ [] ys = ys
+
+depth :: TreeCon t => t a -> Int
+depth = succ . foldl' max 0 . map depth . branches
+
+paths :: TreeCon t => t a -> [[t a]]
+paths = \ case
+    t | null br   -> [[t]]
+      | otherwise -> [ t:p | b <- br, p <- paths b ]
+        where
+            br = branches t
+
+instance TreeCon T.Tree where
+    branches :: T.Tree a -> [T.Tree a]
+    branches = T.subForest
+
+{- DeQueue -}
+class DeQueue q where
+    emptyDQ :: q a
+    nullDQ  :: q a -> Bool
+    consDQ  :: a -> q a -> q a
+    snocDQ  :: q a -> a -> q a
+    dequeueL :: b -> (a -> q a -> b) -> q a -> b
+    dequeueR :: b -> (q a -> a -> b) -> q a -> b
+
+instance DeQueue Q.Seq where
+    emptyDQ :: Q.Seq a
+    emptyDQ = Q.empty
+    nullDQ :: Q.Seq a -> Bool
+    nullDQ  = Q.null
+    consDQ :: a -> Q.Seq a -> Q.Seq a
+    consDQ  = (Q.<|)
+    snocDQ  :: Q.Seq a -> a -> Q.Seq a
+    snocDQ  = (Q.|>)
+    dequeueL :: b -> (a -> Q.Seq a -> b) -> Q.Seq a -> b
+    dequeueL z f dq = case Q.viewl dq of
+        Q.EmptyL  -> z
+        a Q.:< aq -> f a aq
+    dequeueR :: b -> (Q.Seq a -> a -> b) -> Q.Seq a -> b
+    dequeueR z f dq = case Q.viewr dq of
+        Q.EmptyR  -> z
+        aq Q.:> a -> f aq a
+
+{- List utilities -}
+{- |
+>>> combinations 2 "abcd"
+["ab","ac","ad","bc","bd","cd"]
+-}
+combinations :: Int -> [a] -> [[a]]
+combinations = \ case
+    0   -> const [[]]
+    n+1 -> \ case 
+        []   -> []
+        x:xs -> map (x:) (combinations n xs) ++ combinations (n+1) xs
+    _ -> error $ "combinations: " ++ show @Int __LINE__ ++ ", negative"
+
+{- binominal coefficients -}
+nCr :: Integral a => a -> a -> a
+nCr n r
+    | n < 0  || r < 0            = error $ "nCr: " ++ show @Int __LINE__ ++ ", negative "
+    | n < r                      = 0
+    | n == 0 || r == 0 || n == r = 1
+    | otherwise                  = iter 1 n 1
+    where
+        r' = min r (n-r)
+        iter p m = \ case
+            q | q > r'    -> p
+              | otherwise -> iter (p * m `div` q) (pred m) (succ q)
+
+{- partial permutation -}
+nPr :: Integral a => a -> a -> a
+nPr n r = product (genericTake r [n, pred n .. 1])
+
+{- |
+>>> spanCount odd [3,1,4,1,5,9]
+(2,[4,1,5,9])
+-}
+spanCount :: (a -> Bool) -> [a] -> (Int, [a])
+spanCount p = \ case
+    x:xs | p x -> case spanCount p xs of
+        (m,ys)     -> (succ m, ys)
+    xs         -> (0,xs)
+
+{- Run Length Encode -}
+type RLE a = [(a, Int)]
+
+toRLE :: Eq a => [a] -> RLE a
+toRLE = unfoldr psi where
+    psi = \ case
+        x:xs -> case spanCount (x ==) xs of
+            (m,ys) -> Just ((x, succ m), ys)
+        _    -> Nothing
+
+fromRLE :: RLE a -> [a]
+fromRLE = (uncurry (flip replicate) =<<)
+
+rleSplitAt :: Int -> RLE a -> (RLE a, RLE a)
+rleSplitAt = \ case
+    n+1 -> \ case
+        h@(x,m+1):rs
+            | n < m     -> ([(x,n+1)],(x,m-n):rs)
+            | otherwise -> case rleSplitAt (n-m) rs of
+                (as,bs)     -> (h:as,bs)
+        _               -> ([],[])
+    _   -> ([],)
+
+{- |
+>>> runLength "aaaabbbcddeeeeeefghhhh"
+[('a',4),('b',3),('c',1),('d',2),('e',6),('f',1),('g',1),('h',4)]
+-}
+runLength :: Eq a => [a] -> [(a, Int)]
+runLength = toRLE
+
+{- |
+>>> splitEvery 3 [0 .. 10]
+[[0,1,2],[3,4,5],[6,7,8],[9,10]]
+-}
+splitEvery :: Int -> [a] -> [[a]]
+splitEvery k = \ case
+    [] -> []
+    xs -> case splitAt k xs of
+        (ys,zs) -> ys : splitEvery k zs
+
+{- |
+>>> splice 5 "abcdefghij"
+["abcde","bcdef","cdefg","defgh","efghi","fghij"]
+-}
+splice :: Int -> [a] -> [[a]]
+splice n = (!! n) . transpose . map inits . tails
+
+{- |
+>>> subsegments "yay"
+[["y","a","y"],["ya","ay"],["yay"]]
+-}
+subsegments :: [a] -> [[[a]]]
+subsegments = drop 1 . transpose . map inits . transpose . tails 
+
+{- |
+>>> mex [8,23,9,0,12,11,1,10,13,7,41,4,14,21,5,17,3,19,2,6]
+15
+-}
+mex     ::  [Int] -> Int
+mex xs  =   minform 0 (length xs, xs)
+
+minform         ::  Int -> (Int, [Int]) -> Int
+minform a (n,xs)
+  | n == 0      =   a
+  | m == b - a  =   minform b (n-m, vs)
+  | otherwise   =   minform a (m, us)
+    where  (us,vs)  =  partition (< b) xs
+           b        =  a + 1 + n `div` 2
+           m        = length us
+
+{- zipper -}
+type Zp a = ([a],a,[a])
+
+toZp :: [a] -> Zp a
+toZp = \ case 
+    x:xs -> ([],x,xs)
+    _    -> error "toZp: empty list"
+
+fromZp :: Zp a -> [a]
+fromZp = \ case
+    (as,c,bs) -> foldl (flip (:)) (c:bs) as
+
+mvL :: Zp a -> Zp a
+mvL = \ case
+    (a:as,c,bs) -> (as,a,c:bs)
+    _           -> error "mvL: already at left-most"
+
+mvR :: Zp a -> Zp a
+mvR = \ case
+    (as,c,b:bs) -> (c:as,b,bs)
+    _           -> error "mvR: already at right-most"
+
+mvLwhile :: (a -> Bool) -> Zp a -> Zp a
+mvLwhile p = \ case
+    ascbs@([],_,_) -> ascbs
+    ascbs@(_,c,_)
+        | p c       -> mvLwhile p (mvL ascbs)
+        | otherwise -> ascbs
+
+mvRwhile :: (a -> Bool) -> Zp a -> Zp a
+mvRwhile p = \ case
+    ascbs@(_,_,[]) -> ascbs
+    ascbs@(_,c,_)
+        | p c       -> mvRwhile p (mvR ascbs)
+        | otherwise -> ascbs
+
+{- list-tuple transformations -}
+toTuple :: [a] -> (a,a)
+toTuple = \ case
+    x:y:_ -> (x,y)
+    _     -> error $ "toTuple: too short list"
+
+fromTuple :: (a,a) -> [a]
+fromTuple (x,y) = [x,y]
+
+toTriple :: [a] -> (a,a,a)
+toTriple = \ case
+    (x:y:z:_) -> (x,y,z)
+    _         -> error $ "toTriple: too short list"
+
+fromTriple :: (a,a,a) -> [a]
+fromTriple = \ case
+    (x,y,z) -> [x,y,z]
+
+fst3 :: (a,b,c) -> a
+fst3 (x,_,_) = x
+
+snd3 :: (a,b,c) -> b
+snd3 (_,y,_) = y
+
+thd3 :: (a,b,c) -> c
+thd3 (_,_,z) = z
+
+{- counting -}
+countif :: (a -> Bool) -> [a] -> Int
+countif = iter 0
+    where
+        iter a p (x:xs) = iter (bool a (succ a) (p x)) p xs
+        iter a _ []     = a
+
+{- rotate matrix -}
+rotCW :: [[a]] -> [[a]]
+rotCW = transpose . reverse
+
+rotCCW :: [[a]] -> [[a]]
+rotCCW = reverse . transpose
+
+rotPI :: [[a]] -> [[a]]
+rotPI = reverse . map reverse
+
+countWhile :: (a -> Bool) -> (a -> a) -> a -> Int
+countWhile = iter 0 where
+    iter c p f = \ case
+        !x | p x       -> iter (succ c) p f (f x)
+           | otherwise -> c
+
+{- Union-Find -}
+data UF
+    = UF
+    { parent :: IM.IntMap Int
+    , size   :: IM.IntMap Int
+    }
+
+newUF :: Int -> Int -> UF
+newUF s t
+    = UF
+    { parent = IM.fromList $ (,-1) <$> [s .. t]
+    , size   = IM.fromList $ (,1)  <$> [s .. t]
+    }
+
+root :: UF -> Int -> Int
+root uf = \ case
+    x | p == -1   -> x
+      | otherwise -> root uf p
+      where
+        p = parent uf IM.! x
+
+unite :: UF -> Int -> Int -> UF
+unite uf x y = if
+    | x' == y' -> uf
+    | szx > szy -> update uf x' (y', szy)
+    | otherwise -> update uf y' (x', szx)
+    where
+        x' = root uf x
+        y' = root uf y
+        szx = size uf IM.! x'
+        szy = size uf IM.! y'
+        update :: UF -> Int -> (Int, Int) -> UF
+        update u a (b, szb)
+            = u
+            { parent = IM.insert b a (parent u)
+            , size   = IM.adjust (+ szb) a (size u)
+            }
+
+isSame :: UF -> Int -> Int -> Bool
+isSame uf x y = root uf x == root uf y
+
+{- array -}
+scanArray :: (Ix i, Enum i)
+          => (a -> b)
+          -> (b -> a -> b)
+          -> (b -> b -> b -> a -> b)
+          -> Array (i,i) a -> Array (i,i) b
+scanArray f g h sa = ta where
+    ta  = listArray (bounds sa) (phi <$> assocs sa)
+    phi = \ case
+        (ij@(i,j),a)
+            | ij == ij0 -> f a
+            | i  == i0  -> g (ta ! second pred ij) a
+            | j  == j0  -> g (ta ! first  pred ij) a
+            | otherwise -> h (ta ! (pred *** pred) ij) (ta ! first  pred ij) (ta ! second pred ij) a
+            where
+                ij0 = fst (bounds sa)
+                i0  = fst ij0
+                j0  = snd ij0
+
+neighbors4 :: (Ix i, Enum i) => ((i,i),(i,i)) -> (i,i) -> [(i,i)]
+neighbors4 (ij0@(i0,j0),hw@(h,w)) = \ case
+    ij@(i,j) 
+        | ij == ij0    -> filter p [                second succ ij,                first succ ij]
+        | ij == (i0,w) -> filter p [second pred ij,                                first succ ij]
+        | ij == hw     -> filter p [second pred ij,                 first pred ij               ]
+        | ij == (h,j0) -> filter p [                second succ ij, first pred ij               ]
+        | i  == i0     -> filter p [second pred ij, second succ ij,                first succ ij]
+        | j  == j0     -> filter p [                second succ ij, first pred ij, first succ ij]
+        | i  == h      -> filter p [second pred ij, second succ ij, first pred ij               ]
+        | j  == w      -> filter p [second pred ij,                 first pred ij, first succ ij]
+        | otherwise    -> filter p [second pred ij, second succ ij, first pred ij, first succ ij]
+    where
+        p (x,y) = and [i0 <= x, x <= h, j0 <= y, y <= w]
+
+neighbors4Array :: (Ix i, Enum i) => (a -> Bool, Array (i,i) a) -> Array (i,i) (S.Set (i,i))
+neighbors4Array (p,a) = listArray (bounds a) (S.fromList . filter (p . (a !)) . neighbors4 (bounds a) <$> range (bounds a))
+
+bfs4Array :: (Ix i, Enum i, Ord i)
+          => Array (i,i) (S.Set (i,i)) -> (i,i) -> [S.Set (i,i)]
+bfs4Array a ij = unfoldr psi (S.empty, S.singleton ij) where
+    psi = \ case
+        (vs,ns)
+            | S.null ns' -> Nothing
+            | otherwise  -> Just (ns, (vs',ns'))
+            where
+                ns' = S.difference (S.unions $ S.map (a !) ns) vs
+                vs' = S.union vs ns
+
+{- Cartesian Product -}
+cp :: [[a]] -> [[a]]
+cp = \ case
+    []     -> [[]]
+    xs:xss -> [ x : ys | x <- xs, ys <- yss ]
+        where
+            yss = cp xss
+
+{- integer arithmetic -}
+isqrt :: Integral a => a -> a
+isqrt = fromInteger . sqrtI . toInteger
+
+infixr 8 ^!
+
+(^!) :: Num a => a -> Int -> a
+(^!) x n = x^n
+
+averageI :: Integer -> Integer -> Integer
+averageI m n = (m + n) `div` 2
+
+sqrtI :: Integer -> Integer
+sqrtI = \ case
+    m@(_n+2)      -> until (good m) (improve m) 1
+    m | m < 0     -> error "sqrtI: negative"
+      | otherwise -> m
+    where 
+        good x g = g ^! 2 <= x && x < succ g ^! 2
+        improve x g = averageI g (x `div` g)
+
+{- modular arithmetic -}
+modulus :: Int
+modulus = base
+
+euclidEx :: Int -> Int -> (Int,Int,Int)
+euclidEx = f 1 0 0 1 where
+    f s t s' t' a = \ case
+        0 -> (a, s, t)
+        b -> f s' t' (s - q * s') (t - q * t') b r
+            where 
+                (q, r) = divMod a b
+
+mrecip :: Int -> Int
+mrecip a = case euclidEx a modulus of
+    (1, s, _)  -> s `mod` modulus
+    (-1, s, _) -> -s `mod` modulus
+    _          -> invalid $ show @Int __LINE__
+
+minv :: Mod -> Mod
+minv (Mod m) = Mod (mrecip m)
+
+mnCr :: Int -> Int -> Mod
+mnCr n r = a * minv b where
+    a = mfact n
+    b = mfact r * mfact (n - r)
+
+mfact :: Int -> Mod
+mfact = (mfactab !) 
+
+mfactab :: Array Int Mod
+mfactab = listArray (0,factCacheSize) $ scanl' (*) (1 :: Mod) 
+        $ Mod <$> take factCacheSize [(1 :: Int) ..]
+
+newtype Mod = Mod Int
+    deriving (Eq, Show, Read)
+
+instance Num Mod where
+    Mod m + Mod n = Mod (m `madd` n)
+    Mod m * Mod n = Mod (m `mmul` n)
+    negate (Mod m) = Mod (m `mmul` negate 1)
+    fromInteger n = Mod (fromInteger (n `mod` fromIntegral @Int modulus))
+    abs = undefined
+    signum = undefined
+
+toMod :: Int -> Mod
+toMod m = Mod (m `mod` modulus)
+
+fromMod :: Mod -> Int
+fromMod (Mod m) = m
+
+madd :: Int -> Int -> Int
+madd !m !n = (m + n) `mod` modulus
+
+msub :: Int -> Int -> Int
+msub !m = madd m . negate
+
+mmul :: Int -> Int -> Int
+mmul !m !n = m * n `mod` modulus
+
+mexpt :: Int -> Int -> Int
+mexpt !b = \ case
+    0             -> 1
+    o | odd o     -> mmul b (mexpt b (pred o))
+      | otherwise -> mexpt (mmul b b) (o `div` 2)
+
+{- prime numbers -}
+factors :: Int -> IS.IntSet
+factors n = iter IS.empty (isqrt n) where
+    iter s = \ case
+        0 -> s
+        d -> case divMod n d of
+            (q,0) -> iter (IS.insert d (IS.insert q s)) (pred d)
+            _     -> iter s (pred d)
+
+primeFactors :: Int -> [Int]
+primeFactors n = unfoldr f (n,2)
+    where
+        f = \ case
+            (1,_) -> Nothing
+            (m,p) | m < p^!2  -> Just (m,(1,m))
+                  | otherwise -> case divMod m p of
+                (q,0) -> Just (p,(q,p))
+                _ | p == 2    -> f (m,3)
+                  | otherwise -> f (m,p+2)
+
+primesLT1000 :: [Int]
+primesLT1000
+    = [2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71,73,79,83,89,97
+      ,101,103,107,109,113,127,131,137,139,149,151,157,163,167,173,179,181,191,193,197,199
+      ,211,223,227,229,233,239,241,251,257,263,269,271,277,281,283,293
+      ,307,311,313,317,331,337,347,349,353,359,367,373,379,383,389,397
+      ,401,409,419,421,431,433,439,443,449,457,461,463,467,479,487,491,499
+      ,503,509,521,523,541,547,557,563,569,571,577,587,593,599
+      ,601,607,613,617,619,631,641,643,647,653,659,661,673,677,683,691
+      ,701,709,719,727,733,739,743,751,757,761,769,773,787,797
+      ,809,811,821,823,827,829,839,853,857,859,863,877,881,883,887
+      ,907,911,919,929,937,941,947,953,967,971,977,983,991,997]
+
+primesLT1000000 :: () -> [Int]
+primesLT1000000 () = takeWhile (1000000 >) primes
+
+primes :: [Int]
+primes = small ++ large
+    where
+        (p,candidates) = case roll (mkWheel small) of
+            _:x:xs -> (x,xs)
+            _      -> impossible $ "primes: at "++ show @Int __LINE__
+        small          = [2,3,5,7]
+        large          = p : filter isPrime candidates
+        isPrime n      = all (not . divides n) 
+                       $ takeWhile (\ pr -> pr * pr <= n) large
+        divides n pr   = n `mod` pr == 0
+
+data Wheel = Wheel Int [Int]
+
+roll :: Wheel -> [Int]
+roll (Wheel n rs) = [ n * k + r | k <- [0 ..], r <- rs ]
+
+nextSize :: Wheel -> Int -> Wheel
+nextSize (Wheel n rs) p
+    = Wheel (p * n) [ r2 | k <- [0 .. pred p], r <- rs
+                         , let r2 = n*k+r, r2 `mod` p /= 0 ]
+
+mkWheel :: [Int] -> Wheel
+mkWheel = foldl' nextSize w0 where
+    w0 = Wheel 1 [1]
+
+{- bits -}
+bitPat :: Bits a => a -> Int -> [Bool]
+bitPat a w = map (testBit a) $ reverse [0 .. pred w]
+
+selectPat :: [Bool] -> [a] -> [a]
+selectPat = \ case
+    True:bs -> \ case
+        y:ys    -> y : selectPat bs ys
+        _       -> []
+    _:bs    -> \ case
+        _:ys    -> selectPat bs ys
+        _       -> []
+    _       -> const []
+
+{- Thining -}
+
+thinBy :: (a -> a -> Bool) -> [a] -> [a]
+thinBy cmp = foldr bump []
+    where
+        bump x = \ case
+            []   -> singleton x
+            y:ys
+                | x `cmp` y -> x : ys
+                | y `cmp` x -> y : ys
+                | otherwise -> x:y:ys
+
+{- 0/1 knapsack problem -}
+
+type KsName       = String
+type KsValue      = Int
+type KsWeight     = Int
+type KsItem       = (KsValue, KsWeight)
+type KsItem3      = (KsName, KsValue, KsWeight)
+type KsSelection3 = ([KsName], KsValue, KsWeight)
+
+swag :: (?ksArray0 :: A.UArray KsWeight KsValue)
+     => KsWeight -> [(KsWeight, KsValue)] -> KsValue
+swag w = maximum . A.elems . ksValues w
+
+ksValues :: (?ksArray0 :: A.UArray KsWeight KsValue)
+         => KsWeight -> [(KsWeight, KsValue)] -> A.UArray KsWeight KsValue
+ksValues ubw = foldl' step ?ksArray0 where
+    step aa (w,v) = A.accum max aa [(r1, s + v) | (r,s) <- A.assocs aa, let r1 = r + w, r1 <= ubw]
+
+ksName :: KsItem3 -> KsName
+ksName = fst3
+
+ksValue :: (a,KsValue,KsWeight) -> KsValue
+ksValue = snd3
+
+ksWeight :: (a,KsValue,KsWeight) -> KsWeight
+ksWeight = thd3
+
+{- |
+>>> itemList = [("Laptop",30,14)::(KsName,KsValue,KsWeight),("Television",67,31),("Jewellery",19,8),("CD Collection",50,24)]
+>>> a0 = listArray (0,50) (repeat ([],0,0)) :: Array KsWeight KsSelection3
+>>> let {?addName = (:); ?ksSelectionArray0 = a0} in swagDP 50 itemList
+(["CD Collection","Jewellery","Laptop"],99,46)
+-}
+swagDP :: ( ?addName :: KsName -> [KsName] -> [KsName]
+          , ?ksSelectionArray0 :: Array KsWeight KsSelection3 )
+       => KsWeight -> [KsItem3] -> KsSelection3
+swagDP w = maxWith ksValue . elems . ksSelections w
+
+ksSelections :: ( ?addName :: KsName -> [KsName] -> [KsName]
+                , ?ksSelectionArray0 :: Array KsWeight KsSelection3 )
+             => KsWeight -> [KsItem3] -> Array KsWeight KsSelection3
+ksSelections ubw = foldl' step ?ksSelectionArray0 where
+    step aa (n,v,w) = accum better aa
+                    [ (r1, (?addName n (fst3 s), v + ksValue s, w + ksWeight s))
+                    | (r,s) <- assocs aa, let r1 = r + w, r1 <= ubw]
+    better sn1 sn2 = if ksValue sn1 >= ksValue sn2 then sn1 else sn2
+
+swagDPA :: (?addName :: KsName -> [KsName] -> [KsName])
+        => KsWeight -> [KsItem3] -> KsSelection3
+swagDPA w items = aa ! w
+    where
+        aa :: Array KsWeight KsSelection3
+        aa = ksSelectionsA w items
+        
+ksSelectionsA :: (?addName :: KsName -> [KsName] -> [KsName])
+              => KsWeight -> [KsItem3] -> Array KsWeight KsSelection3
+ksSelectionsA w = foldr step start 
+    where
+        start :: Array KsWeight KsSelection3
+        start = accumArray undefined ([],0,0) (0,w) []
+
+        step :: (?addName :: KsName -> [KsName] -> [KsName])
+             => KsItem3 
+             -> Array KsWeight KsSelection3 
+             -> Array KsWeight KsSelection3
+        step i a = fmap phi a0
+            where
+                phi = \ case
+                    j | j < wi    -> a ! j
+                      | otherwise -> better (a ! j) (add i (a ! (j - wi)))
+                wi = ksWeight i
+
+        better :: KsSelection3 -> KsSelection3 -> KsSelection3
+        better sn1 sn2 = if ksValue sn1 >= ksValue sn2 then sn1 else sn2
+
+        a0 :: Array KsWeight KsWeight
+        a0 = listArray (0,w) [0 .. w]
+
+        add :: (?addName :: KsName -> [KsName] -> [KsName])
+            => KsItem3 -> KsSelection3 -> KsSelection3
+        add i (!ns,v,w0) 
+            = (?addName (ksName i) ns, ksValue i + v, ksWeight i + w0)
+
+swagTn :: KsWeight -> [KsItem3] -> KsSelection3
+swagTn w = maxWith ksValue . foldr tstep [([], 0, 0)]
+    where
+        tstep :: KsItem3 -> [KsSelection3] -> [KsSelection3]
+        tstep i = thinBy rel . mergeBy cmp . map (extend i)
+
+        extend :: KsItem3 -> KsSelection3 -> [KsSelection3]
+        extend i sn = filter (within w) [sn, add i sn]
+
+        within :: KsWeight -> KsSelection3 -> Bool
+        within w0 = (w0 >=) . ksWeight 
+
+        cmp :: KsSelection3 -> KsSelection3 -> Bool
+        cmp sn1 sn2 = ksWeight sn1 <= ksWeight sn2
+        
+        add :: KsItem3 -> KsSelection3 -> KsSelection3
+        add i (ns,v,w0) = (ksName i : ns, ksValue i + v, ksWeight i + w0)
+
+        rel :: KsSelection3 -> KsSelection3 -> Bool
+        rel sn1 sn2 = ksValue  sn1 >= ksValue  sn2
+                   && ksWeight sn1 <= ksWeight sn2
+
+mergeBy :: (a -> a -> Bool) -> [[a]] -> [a]
+mergeBy cmp = foldr merge []
+    where
+        merge xs [] = xs
+        merge [] ys = ys
+        merge xxs@(x:xs) yys@(y:ys)
+            | cmp x y = x : merge xs yys
+            | otherwise = y : merge xxs ys
+
+maxWith :: (Ord b) => (a -> b) -> [a] -> a
+maxWith = maximumBy . comparing
