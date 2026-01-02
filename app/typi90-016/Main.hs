@@ -56,11 +56,13 @@ type Solver = Dom -> Codom
 
 solve :: Solver
 solve = \ case
-    (a,b,c,n) -> case sort [a,b,c] of
-        a':b':c':_ -> case map ((`subtract` n) . (c' *)) [0 .. div n c'] of
-            xys -> undefined
-        _          -> impossible ""
-
+    (a',b',c',n) -> case sort [a',b',c'] of
+        [a,b,c] -> undefined
+            where
+                zs = [ n - c*d | d <- [0 .. n `div` c] ]
+                ys m = (b *) <$> [0 .. m `div` b]
+                xs m = (a *) <$> [0 .. m `div` a]                
+        _       -> impossible ""
 
 decode :: [[I]] -> Dom
 decode = \ case
