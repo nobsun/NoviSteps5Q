@@ -1,5 +1,5 @@
 name:                NoviSteps5Q
-version:             0.227.0
+version:             0.233.0
 github:              nobsun/NoviSteps5Q
 license:             BSD3
 author:              Nobuo Yamashita
@@ -69,6 +69,54 @@ library:
   source-dirs: src
 
 executables:
+  dutchflag:
+    main:               Main.hs
+    source-dirs:        app/dutchflag
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - NoviSteps5Q
+
+  joi2018yoc:
+    main:               Main.hs
+    source-dirs:        app/joi2018yoc
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - NoviSteps5Q
+
+  joig2025a:
+    main:               Main.hs
+    source-dirs:        app/joig2025a
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - NoviSteps5Q
+
+  joisc2010:
+    main:               Main.hs
+    source-dirs:        app/joisc2010
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - NoviSteps5Q
+
+  past202107:
+    main:               Main.hs
+    source-dirs:        app/past202107
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - NoviSteps5Q
+
+  typi90-055:
+    main:               Main.hs
+    source-dirs:        app/typi90-055
+    ghc-options:
+    - -rtsopts
+    dependencies:
+    - NoviSteps5Q
+
   typi90-016:
     main:               Main.hs
     source-dirs:        app/typi90-016

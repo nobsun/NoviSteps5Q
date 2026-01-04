@@ -47,23 +47,32 @@ debug = () /= ()
 type I = Int
 type O = Int
 
-type Dom   = ()
-type Codom = ()
+type Dom   = (I,I,[I])
+type Codom = O
 
 type Solver = Dom -> Codom
 
 solve :: Solver
 solve = \ case
-    () -> ()
+    (n,k,as) -> case compare x k of
+        LT       -> case compare y k of
+            LT      -> 0
+            _       -> sum (take k cs)
+        _       -> case compare y k of
+            LT      -> sum (take k bs)
+            _       -> max (sum $ take k bs) (sum $ take k cs)
+        where
+            (bs,cs) = sortOn Down *** sortOn Down $ partition odd as
+            (x,y)   = (length bs, n - x)
 
 decode :: [[I]] -> Dom
 decode = \ case
-    _:_ -> ()
-    _   -> invalid $ "toDom: " ++ show @Int __LINE__
+    [n,k]:as:_ -> (n,k,as)
+    _          -> invalid $ "toDom: " ++ show @Int __LINE__
 
 encode :: Codom -> [[O]]
 encode = \ case
-    _rr -> [[]]
+    r -> [[r]]
 
 main :: IO ()
 main = B.interact (detokenize . encode . solve . decode . entokenize)

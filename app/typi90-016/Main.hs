@@ -44,7 +44,7 @@ import Debug.Trace qualified as Debug
 >>> :set -XOverloadedStrings
 -}
 debug :: Bool
-debug = () /= ()
+debug = () == ()
 
 type I = Int
 type O = Int
@@ -56,17 +56,16 @@ type Solver = Dom -> Codom
 
 solve :: Solver
 solve = \ case
-    (a',b',c',n) -> case sort [a',b',c'] of
-        [a,b,c] -> undefined
-            where
-                zs = [ n - c*d | d <- [0 .. n `div` c] ]
-                ys m = (b *) <$> [0 .. m `div` b]
-                xs m = (a *) <$> [0 .. m `div` a]                
-        _       -> impossible ""
-
+    (a,b,c,n) -> minimum [ x+y+z | x <- [0 .. 9999]
+                                 , y <- [0 .. 9999 - x]
+                                 , let s = x * a + y * b
+                                 , n >= s
+                                 , let (z,r) = divMod (n - s) c
+                                 , r == 0 ]
+                                 
 decode :: [[I]] -> Dom
 decode = \ case
-    [a,b,c,n]:_ -> (a,b,c,n)
+    [n]:[a,b,c]:_ -> (a,b,c,n)
     _   -> invalid $ "toDom: " ++ show @Int __LINE__
 
 encode :: Codom -> [[O]]

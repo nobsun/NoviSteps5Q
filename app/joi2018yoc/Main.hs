@@ -47,23 +47,29 @@ debug = () /= ()
 type I = Int
 type O = Int
 
-type Dom   = ()
-type Codom = ()
+type Dom   = (I,I,[[I]])
+type Codom = O
 
 type Solver = Dom -> Codom
 
 solve :: Solver
 solve = \ case
-    () -> ()
+    (h,w,mss) -> minimum $ map phi ijs
+        where
+            ms = tracing $ zip ijs (concat mss)
+            ijs = range ((1,1),(h,w))
+            phi (i,j) = sum $ map psi ms
+                where
+                    psi ((i',j'),k) = min (abs (i - i')) (abs (j - j')) * k
 
 decode :: [[I]] -> Dom
 decode = \ case
-    _:_ -> ()
+    [h,w]:mss -> (h,w,mss)
     _   -> invalid $ "toDom: " ++ show @Int __LINE__
 
 encode :: Codom -> [[O]]
 encode = \ case
-    _rr -> [[]]
+    r -> [[r]]
 
 main :: IO ()
 main = B.interact (detokenize . encode . solve . decode . entokenize)

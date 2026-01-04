@@ -44,26 +44,32 @@ import Debug.Trace qualified as Debug
 debug :: Bool
 debug = () /= ()
 
-type I = Int
-type O = Int
+type I = String
+type O = String
 
-type Dom   = ()
-type Codom = ()
+type Dom   = I
+type Codom = O
 
 type Solver = Dom -> Codom
 
 solve :: Solver
 solve = \ case
-    () -> ()
+    s -> iter s
+        where
+            iter = \ case
+                t | null (drop 2 t) -> t
+                  | take 3 t `elem` ls -> "..." ++ iter (drop 3 t)
+                  | otherwise          -> take 1 t ++ iter (drop 1 t)
+            ls = ["axa","ixi","uxu","exe","oxo"]
 
 decode :: [[I]] -> Dom
 decode = \ case
-    _:_ -> ()
+    _:[s]:_ -> s
     _   -> invalid $ "toDom: " ++ show @Int __LINE__
 
 encode :: Codom -> [[O]]
 encode = \ case
-    _rr -> [[]]
+    r -> [[r]]
 
 main :: IO ()
 main = B.interact (detokenize . encode . solve . decode . entokenize)

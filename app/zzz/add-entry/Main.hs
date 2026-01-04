@@ -26,7 +26,7 @@ proc pj ex = do
         ; from     = "app" </> "Main.hs"
         ; to       = execdir </> "Main.hs"
         }
-    ; _ <- bool (createDirectory execdir) (return ()) <$> doesDirectoryExist execdir
+    ; _ <- bool (createDirectory execdir) (return ()) =<< doesDirectoryExist execdir
     ; copyFile from to
     ; insEntry pj normex
     }

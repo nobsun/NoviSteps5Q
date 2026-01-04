@@ -441,6 +441,12 @@ cradle:
     - path: "./app/dubiousdocument/Paths_NoviSteps5Q.hs"
       component: "NoviSteps5Q:exe:dubiousdocument"
 
+    - path: "./app/dutchflag/Main.hs"
+      component: "NoviSteps5Q:exe:dutchflag"
+
+    - path: "./app/dutchflag/Paths_NoviSteps5Q.hs"
+      component: "NoviSteps5Q:exe:dutchflag"
+
     - path: "./app/energydrinkcollector/Main.hs"
       component: "NoviSteps5Q:exe:energydrinkcollector"
 
@@ -555,6 +561,12 @@ cradle:
     - path: "./app/irohasobsession/Paths_NoviSteps5Q.hs"
       component: "NoviSteps5Q:exe:irohasobsession"
 
+    - path: "./app/joi2018yoc/Main.hs"
+      component: "NoviSteps5Q:exe:joi2018yoc"
+
+    - path: "./app/joi2018yoc/Paths_NoviSteps5Q.hs"
+      component: "NoviSteps5Q:exe:joi2018yoc"
+
     - path: "./app/joi2024yo2a/Main.hs"
       component: "NoviSteps5Q:exe:joi2024yo2a"
 
@@ -566,6 +578,18 @@ cradle:
 
     - path: "./app/joi2025a/Paths_NoviSteps5Q.hs"
       component: "NoviSteps5Q:exe:joi2025a"
+
+    - path: "./app/joig2025a/Main.hs"
+      component: "NoviSteps5Q:exe:joig2025a"
+
+    - path: "./app/joig2025a/Paths_NoviSteps5Q.hs"
+      component: "NoviSteps5Q:exe:joig2025a"
+
+    - path: "./app/joisc2010/Main.hs"
+      component: "NoviSteps5Q:exe:joisc2010"
+
+    - path: "./app/joisc2010/Paths_NoviSteps5Q.hs"
+      component: "NoviSteps5Q:exe:joisc2010"
 
     - path: "./app/langtonstakahashi/Main.hs"
       component: "NoviSteps5Q:exe:langtonstakahashi"
@@ -668,6 +692,12 @@ cradle:
 
     - path: "./app/numberplace/Paths_NoviSteps5Q.hs"
       component: "NoviSteps5Q:exe:numberplace"
+
+    - path: "./app/past202107/Main.hs"
+      component: "NoviSteps5Q:exe:past202107"
+
+    - path: "./app/past202107/Paths_NoviSteps5Q.hs"
+      component: "NoviSteps5Q:exe:past202107"
 
     - path: "./app/pconthetable/Main.hs"
       component: "NoviSteps5Q:exe:pconthetable"
@@ -890,6 +920,12 @@ cradle:
 
     - path: "./app/typi90-020/Paths_NoviSteps5Q.hs"
       component: "NoviSteps5Q:exe:typi90-020"
+
+    - path: "./app/typi90-055/Main.hs"
+      component: "NoviSteps5Q:exe:typi90-055"
+
+    - path: "./app/typi90-055/Paths_NoviSteps5Q.hs"
+      component: "NoviSteps5Q:exe:typi90-055"
 
     - path: "./app/typing/Main.hs"
       component: "NoviSteps5Q:exe:typing"

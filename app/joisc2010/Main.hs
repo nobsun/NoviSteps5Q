@@ -44,26 +44,53 @@ import Debug.Trace qualified as Debug
 debug :: Bool
 debug = () /= ()
 
-type I = Int
+type I = String
 type O = Int
 
-type Dom   = ()
-type Codom = ()
+type Dom   = (Int,Int,Int,Int,Int,[Int],[(Int,Int,Int,I)])
+type Codom = [O]
 
 type Solver = Dom -> Codom
 
 solve :: Solver
 solve = \ case
-    () -> ()
+    (n,m,_t,x,_y,ps,ls) -> map psi [1 .. n]
+        where
+            pa = listArray (1,m) ps
+            ea = accumArray (const id) -1 ((1,1),(n,m)) $ mapMaybe phi ls
+                where
+                    phi (tk,nk,mk,rk) = case rk of
+                        "open" -> Just ((nk,mk),tk)
+                        _      -> Nothing
+            sa = accumArray (const id) -1 ((1,1),(n,m)) $ mapMaybe phi ls
+                where
+                    phi (tk,nk,mk,rk) = case rk of
+                        "correct" -> Just ((nk,mk),tk)
+                        _         -> Nothing
+            wa = accumArray (+) 0 ((1,1),(n,m)) $ mapMaybe phi ls
+                where
+                    phi (_tk,nk,mk,rk) = case rk of
+                        "incorrect" -> Just ((nk,mk),1)
+                        _           -> Nothing
+            psi nk = sum $ score <$> [1 .. m]
+                where
+                    score i = case sa ! (nk, i) of
+                        -1 -> 0
+                        tk -> max x (pa ! i + ea ! (nk,i) - tk - 120 * wa ! (nk,i))
 
 decode :: [[I]] -> Dom
 decode = \ case
-    _:_ -> ()
+    [n,m,t,x,y]:rss -> case splitAt m' rss of
+        (ps,ls)         -> (read n, m', read t, read x, read y, read <$> concat ps, phi <$> ls)
+        where
+            m' = read m
+            phi [tk,nk,mk,rk] = (read tk, read nk, read mk, rk)
+            phi _             = invalid ""
     _   -> invalid $ "toDom: " ++ show @Int __LINE__
 
 encode :: Codom -> [[O]]
 encode = \ case
-    _rr -> [[]]
+    rr -> singleton <$> rr
 
 main :: IO ()
 main = B.interact (detokenize . encode . solve . decode . entokenize)

@@ -47,23 +47,28 @@ debug = () /= ()
 type I = Int
 type O = Int
 
-type Dom   = ()
-type Codom = ()
+type Dom   = (I,I,[I])
+type Codom = O
 
 type Solver = Dom -> Codom
 
 solve :: Solver
 solve = \ case
-    () -> ()
+    (p,q,as) -> sum [ 1 | a5 <- a5s 
+                        , prod a5 == q ]
+        where
+            a5s = combinations 5 as
+            prod = foldl' mul 1 
+            mul x y = x * y `mod` p
 
 decode :: [[I]] -> Dom
 decode = \ case
-    _:_ -> ()
+    [_,p,q]:as:_ -> (p,q,as)
     _   -> invalid $ "toDom: " ++ show @Int __LINE__
 
 encode :: Codom -> [[O]]
 encode = \ case
-    _rr -> [[]]
+    r -> [[r]]
 
 main :: IO ()
 main = B.interact (detokenize . encode . solve . decode . entokenize)
